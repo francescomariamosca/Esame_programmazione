@@ -1,5 +1,5 @@
 # Esame Programmazione ad Oggetti
-### Descrizione Generale
+### qual è l'idea, l'idea è...
 Questo progetto consiste nella realizzazione di un servizio meteo che, dato lo zipCode di una città, permette di visualizzare i dati relativi a temperatura e umidità.
 Permette la visione di statistiche personalizzabili con filtri, la ricerca per nome o sottostringa.
 
