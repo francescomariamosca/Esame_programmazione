@@ -1,31 +1,41 @@
 package Model;
 
 public class Weather {
-	private float temperatura;
-	private float umidita;
-	private int zipCode;
+	private double temperatura;
+	private double umidita;
 	private String nomeCitta;
 	
-	public Weather(float temp, float umi, int zip, String citta) {
+	public Weather(double temp, double umi, int zip, String citta) {
 		super();
 		this.nomeCitta = citta;
 		this.temperatura = temp;
 		this.umidita = umi;
-		this.zipCode = zip;
+	}
+
+	public double getTemperatura() {
+		return temperatura;
+	}
+
+	public void setTemperatura(double temperatura) {
+		this.temperatura = temperatura;
+	}
+
+	public double getUmidita() {
+		return umidita;
+	}
+
+	public void setUmidita(double umidita) {
+		this.umidita = umidita;
+	}
+
+	public String getNomeCitta() {
+		return nomeCitta;
+	}
+
+	public void setNomeCitta(String nomeCitta) {
+		this.nomeCitta = nomeCitta;
 	}
 	
-	/* Getter */
-	public float getTemperatura() {
-		return this.temperatura;
-	}
-	public int getZipCode() {
-		return this.zipCode;
-	}
-	public String getNomeCitta() {
-		return this.nomeCitta;
-	}
-	public float getUmidita() {
-		return this.umidita;
-	}
+
 	
 }
