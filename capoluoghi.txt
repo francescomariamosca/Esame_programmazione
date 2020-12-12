@@ -1,0 +1,29 @@
+Rome  00187
+Aosta  11100
+Torino  10121
+Genova  16121
+Milan  20121
+Trento  38100
+Venice  30100
+Trieste  34121
+Bologna  40121
+Firenze 50121
+Ancona  60100
+Perugia  06121
+L'Aquila  67100
+Campobasso  86100
+Naples  80100
+Bari  70121
+Potenza  85100
+Catanzaro  88100
+Palermo  90100
+Cagliari  09100
+
+
+
+
+
+
+
+
+
