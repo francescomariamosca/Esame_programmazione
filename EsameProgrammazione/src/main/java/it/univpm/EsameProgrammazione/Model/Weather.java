@@ -1,4 +1,6 @@
 package it.univpm.EsameProgrammazione.Model;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class Weather {
 	private double temperatura;
@@ -8,10 +10,6 @@ public class Weather {
 	
 	public Weather(double temp, double umi, int zip, String citta) {
 		super();
-		this.nomeCitta = citta;
-		this.temperatura = temp;
-		this.umidita = umi;
-		this.data = "";
 	}
 
 	public double getTemperatura() {
@@ -38,6 +36,13 @@ public class Weather {
 		this.nomeCitta = nomeCitta;
 	}
 	
+	public String getData() {
+		return data;
+	}
+	
+	public void setData(String data) {
+		this.data = data;
+	}
 
 	
 }
