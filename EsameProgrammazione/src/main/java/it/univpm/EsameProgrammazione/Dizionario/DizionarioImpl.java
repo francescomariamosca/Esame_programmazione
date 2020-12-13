@@ -64,15 +64,16 @@ public class DizionarioImpl implements InterfacciaDizionario{
     }
 
     @Override
-    public JSONArray cercaSottostringa(String sottostringa) {
+    public JSONArray cercaSottostringa (String sottostringa){
 
         // creo un JSONArray in cui inserirò tuti i JSONObject che contengono la sottostringa nel loro attributo nome
         JSONArray stringaCitta = new JSONArray();
-        for(int i = 0; i<dizionario.capacity(); i++){
+        popolaDizionario();
+        for (int i = 0; i < dizionario.size(); i++) {
             JSONObject objCitta = new JSONObject();
             objCitta.put("name", dizionario.elementAt(i).nomeCitta);
             objCitta.put("Zip Code", dizionario.elementAt(i).zipCode);
-            if(objCitta.containsKey(sottostringa)){
+            if (dizionario.elementAt(i).nomeCitta.contains(sottostringa)) {
                 stringaCitta.add(objCitta); // inserisco solo i JSONObject che contengono la sottostringa
             }
 

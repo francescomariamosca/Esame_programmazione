@@ -24,21 +24,24 @@ public class Controller {
 	 */
 	@GetMapping("/Suggest")
 	public JSONArray getCitta(){
-		JSONArray citta = new JSONArray();
+		JSONArray citta;
 		DizionarioImpl dizionario = new DizionarioImpl();
 		citta = dizionario.visualizzaDizionario();
 		return citta;
 	}
 
-	/*
-	@GetMapping("/Suggest")
-	public JSONArray getSottostringa(@RequestParam(name = "sottostringa", defaultValue = "")String sottostringa){
-		JSONArray cittaSottostringa = new JSONArray();
+
+
+	/**
+	 * rotta per visualizzare i capoluoghi con i rispettivi zipCode, che contengono la sottostringa immessa
+	 * @return ritorna un JSONArray contenente i capoluoghi che contengono la stirga immessa
+	 */
+	@GetMapping("/Sottostringa")
+	public JSONArray getSottostringa(@RequestParam(name = "q", defaultValue = "")String sottostringa){
+		JSONArray cittaSottostringa;
 		DizionarioImpl dizionarioSottostringa = new DizionarioImpl();
 		cittaSottostringa = dizionarioSottostringa.cercaSottostringa(sottostringa);
-		return cittaSottostringa;
-	}*/
-
-
+		return  cittaSottostringa;
+	}
 
 }
