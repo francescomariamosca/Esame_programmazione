@@ -5,6 +5,12 @@ import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.springframework.scheduling.annotation.Scheduled;
 
+/*
+ * Classe che si occupa della gestione del DataSet
+ * che servirà per creare le statistiche
+ * Il DataSet è sul file esterno "DataSet.json"
+ */
+
 public class DataSet {
 	public JSONArray arrayWeathers;
 	

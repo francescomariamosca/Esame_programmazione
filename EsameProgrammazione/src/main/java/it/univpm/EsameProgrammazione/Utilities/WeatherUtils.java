@@ -1,9 +1,6 @@
 package it.univpm.EsameProgrammazione.Utilities;
-import it.univpm.EsameProgrammazione.Model.*;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +10,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+/*
+ * Classe che realizza le chiamate API
+ * il parsing in JSON e popola il vettore di arrayJSON
+ * che compone il DataSet
+ */
 
 public class WeatherUtils {
 	protected String data;
@@ -32,6 +35,11 @@ public class WeatherUtils {
 		this.weather = new JSONObject();
 		this.dataSetArray = new DataSet();
 	}
+	
+	/*
+	 * Funzione che realizza la chiamata API, effettua il parsing
+	 * e popola il vettore di array JSON
+	 */
 	
 	public JSONObject chiamataAPI(String zipCode, boolean isObject) throws ParseException {
 		String url = "http://api.openweathermap.org/data/2.5/weather?zip="+zipCode+",it&appid=d35f43c24da97bb20f7a438c07178ae0";
@@ -72,6 +80,10 @@ public class WeatherUtils {
 			return weather;
 
 	}
+	
+	/*
+	 * Getter and Setters WeathersUtils
+	 */
 
 	public String getData() {
 		return data;

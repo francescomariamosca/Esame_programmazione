@@ -18,6 +18,8 @@ public class Controller {
 	public String API = "d35f43c24da97bb20f7a438c07178ae0";
 	public String url = "";
 	public WeatherUtils callWeather = new WeatherUtils();
+	
+	
 	/*
 	 * rotta di tipo GET per cercare informazioni relative alla temperatura e umidità
 	 * partendo dallo zipCode
@@ -29,6 +31,8 @@ public class Controller {
 		System.out.print(zipCode);
 		return callWeather.chiamataAPI(zipCode, true);
 	}
+	
+	
 	
 	/*
 	 * Prova per vedere se il vettore di array è popolato o meno

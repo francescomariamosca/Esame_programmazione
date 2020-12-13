@@ -1,6 +1,9 @@
 package it.univpm.EsameProgrammazione.Model;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+
+/*
+ * Classe che rappresenta il tempo di una chiamata
+ * con le informazioni richieste
+ */
 
 public class Weather {
 	private double temperatura;
