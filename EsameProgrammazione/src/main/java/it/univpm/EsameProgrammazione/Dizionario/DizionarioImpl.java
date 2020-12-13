@@ -73,7 +73,7 @@ public class DizionarioImpl implements InterfacciaDizionario{
             JSONObject objCitta = new JSONObject();
             objCitta.put("name", dizionario.elementAt(i).nomeCitta);
             objCitta.put("Zip Code", dizionario.elementAt(i).zipCode);
-            if (dizionario.elementAt(i).nomeCitta.contains(sottostringa)) {
+            if (dizionario.elementAt(i).nomeCitta.contains(sottostringa)) {  // verifico se contiene la sottostringa
                 stringaCitta.add(objCitta); // inserisco solo i JSONObject che contengono la sottostringa
             }
 
