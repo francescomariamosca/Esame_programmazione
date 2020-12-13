@@ -1,11 +1,9 @@
 package it.univpm.EsameProgrammazione.controller;
 
-import org.json.simple.JSONObject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import it.univpm.EsameProgrammazione.Utilities.*;
+import it.univpm.EsameProgrammazione.Dizionario.DizionarioImpl;
+import it.univpm.EsameProgrammazione.Utilities.WeatherUtils;
+import org.json.simple.JSONArray;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class Controller {
@@ -19,4 +17,28 @@ public class Controller {
 		url = "http://api.openweathermap.org/data/2.5/weather?zip="+zipCode+",it&appid="+this.API+"";
 		return callWeather.chiamataAPI(url, true);
 	}
+
+	/**
+	 * rotta per visualizzare i capoluoghi con i rispettivi zipCode
+	 * @return ritorna un JSONArray contenente i capoluoghi
+	 */
+	@GetMapping("/Suggest")
+	public JSONArray getCitta(){
+		JSONArray citta = new JSONArray();
+		DizionarioImpl dizionario = new DizionarioImpl();
+		citta = dizionario.visualizzaDizionario();
+		return citta;
+	}
+
+	/*
+	@GetMapping("/Suggest")
+	public JSONArray getSottostringa(@RequestParam(name = "sottostringa", defaultValue = "")String sottostringa){
+		JSONArray cittaSottostringa = new JSONArray();
+		DizionarioImpl dizionarioSottostringa = new DizionarioImpl();
+		cittaSottostringa = dizionarioSottostringa.cercaSottostringa(sottostringa);
+		return cittaSottostringa;
+	}*/
+
+
+
 }

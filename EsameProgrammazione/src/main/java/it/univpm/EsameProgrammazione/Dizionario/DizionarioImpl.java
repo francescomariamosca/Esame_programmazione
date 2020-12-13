@@ -50,26 +50,14 @@ public class DizionarioImpl implements InterfacciaDizionario{
     }
 
     @Override
-    public JSONArray cittaFamose() {
-
-        JSONArray cittaEsempio = new JSONArray(); // JSONArray delle 5 città esempio
-        for(int i = 0; i<5; i++){
-            JSONObject objCitta = new JSONObject();
-            objCitta.put("name", dizionario.elementAt(i).nomeCitta);
-            objCitta.put("Zip Code", dizionario.elementAt(i).zipCode);
-            cittaEsempio.add(objCitta); // inserimento di ciascun JSONObject nel JSONArray
-        }
-        return cittaEsempio;
-    }
-
-    @Override
     public JSONArray visualizzaDizionario() {
 
 
+        popolaDizionario();
         for(int i = 0; i<dizionario.capacity(); i++){
             JSONObject objCitta = new JSONObject();
+            objCitta.put("zipCode", dizionario.elementAt(i).zipCode);
             objCitta.put("name", dizionario.elementAt(i).nomeCitta);
-            objCitta.put("Zip Code", dizionario.elementAt(i).zipCode);
             dizionarioCompleto.add(objCitta); // inserimento di ciascun JSONObject nel JSONArray
         }
         return dizionarioCompleto;

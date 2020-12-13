@@ -11,17 +11,12 @@ public interface InterfacciaDizionario {
      * popola la HashMap dal file capoluoghi.txt
      */
      void popolaDizionario();
-    /**
-     *
-     * @return ritorna un jsonArray contenente 5 città famose con i rispettivi zipCode.
-     */
-     JSONArray cittaFamose();
 
     /**
      *
      * @return ritona un jsonArray contenente tutti i capoluoghi con i rispettivi zipCode.
      */
-     JSONArray visualizzaDizionario();
+    JSONArray visualizzaDizionario();
 
     /**
      *
