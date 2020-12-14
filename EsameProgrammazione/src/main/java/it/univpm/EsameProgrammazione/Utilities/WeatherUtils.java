@@ -1,11 +1,15 @@
 package it.univpm.EsameProgrammazione.Utilities;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;    
 import org.springframework.web.client.RestTemplate;
+
+import it.univpm.EsameProgrammazione.Model.Weather;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,23 +21,25 @@ import org.json.simple.parser.ParseException;
  * che compone il DataSet
  */
 
-public class WeatherUtils {
+public class WeatherUtils{
 	protected String data;
 	protected JSONObject objectJ;
-	protected JSONArray weathers;
+	//protected JSONArray weathers;
 	protected JSONObject main;
 	protected JSONParser parser;
-	protected JSONObject weather;
+	protected JSONObject obj;
+	
 	protected DataSet dataSetArray;
+	protected Weather weather;
 	
 	public WeatherUtils() {
 		this.data = "";
 		this.objectJ = new JSONObject();
 		this.main = new JSONObject();
 		this.parser = new JSONParser();
-		this.weathers = new JSONArray();
-		this.weather = new JSONObject();
+		this.obj = new JSONObject();
 		this.dataSetArray = new DataSet();
+		this.weather = new Weather(0, 0, 0, "");
 	}
 	
 	/*
@@ -64,21 +70,29 @@ public class WeatherUtils {
 			} finally {
 				in.close();
 			}*/
-		}catch(Exception e) {
-			System.out.println("Sarà quel che sarà");
-		}
 			objectJ = (JSONObject) parser.parse(data);
 			main = (JSONObject) objectJ.get("main");
-			weather.put("name", objectJ.get("name"));
-			weather.put("temperature", main.get("temp"));
-			weather.put("humidity", main.get("humidity"));
-			weather.put("date", dtf.format(now));
+			obj.put("name", objectJ.get("name"));
+			obj.put("temperature", main.get("temp"));
+			obj.put("humidity", main.get("humidity"));
+			obj.put("date", dtf.format(now));
 			
-			weathers.add(weather);
-			dataSetArray.setArrayWeathers(weathers);
+			/*weather.setNomeCitta(objectJ.get("name").toString());
+			weather.setData(dtf.format(now));
+			weather.setTemperatura(Double.parseDouble(main.get("temp").toString()));
+			weather.setUmidita(Double.parseDouble(main.get("humidity").toString()));
+			dataSetArray.addWeather(weather);
+			*/
+			return obj;
+		}
+		catch(IOException e) {
+				obj.put("name", "zipCode errato o non disponibile");
+				obj.put("temperature", "wrong or unavailable zip code");
+				obj.put("humidity", "falsche oder nicht verfügbare Postleitzahl");
+				obj.put("date", "code postal incorrect ou indisponible");
+				return obj;
+		}
 		
-			return weather;
-
 	}
 	
 	/*
@@ -101,14 +115,6 @@ public class WeatherUtils {
 		this.objectJ = objectJ;
 	}
 
-	public JSONArray getWeathers() {
-		return weathers;
-	}
-
-	public void setWeathers(JSONArray weathers) {
-		this.weathers = weathers;
-	}
-
 	public JSONObject getMain() {
 		return main;
 	}
@@ -126,11 +132,11 @@ public class WeatherUtils {
 	}
 
 	public JSONObject getWeather() {
-		return weather;
+		return obj;
 	}
 
-	public void setWeather(JSONObject weather) {
-		this.weather = weather;
+	public void setWeather(JSONObject obj) {
+		this.obj = obj;
 	}
 
 	public DataSet getDataSetArray() {

@@ -32,16 +32,6 @@ public class Controller {
 		return callWeather.chiamataAPI(zipCode, true);
 	}
 	
-	
-	
-	/*
-	 * Prova per vedere se il vettore di array è popolato o meno
-	 * la toglierò alla fine
-	 */
-	@GetMapping("/pippo")
-	public JSONArray getData() {
-		return callWeather.getWeathers();
-	}
 
 	/**
 	 * rotta per visualizzare i capoluoghi con i rispettivi zipCode
