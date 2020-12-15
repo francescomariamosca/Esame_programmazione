@@ -1,6 +1,17 @@
 package it.univpm.EsameProgrammazione.Utilities;
 
 import it.univpm.EsameProgrammazione.Model.Weather;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.net.URL;
+import java.net.URLConnection;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;    
+import org.springframework.web.client.RestTemplate;
+
+import it.univpm.EsameProgrammazione.Model.Weather;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -18,6 +29,7 @@ import java.time.format.DateTimeFormatter;
  * il parsing in JSON e popola il vettore di arrayJSON
  * che compone il DataSet
  */
+
 
 public class WeatherUtils implements Serializable {
 	protected String data;
@@ -82,6 +94,8 @@ public class WeatherUtils implements Serializable {
 			dataSetArray.addWeather(weather);
 
 
+			dataSetArray.addWeather(weather); 	
+			
 			return obj;
 		}
 		catch(IOException e) {
