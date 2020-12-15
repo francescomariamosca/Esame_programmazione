@@ -7,7 +7,7 @@ package it.univpm.EsameProgrammazione.Model;
 
 import java.io.Serializable;
 
-public class Weather implements Serializable {
+public class Weather implements Serializable { // per serializzazione
 	private double temperatura;
 	private double umidita;
 	private String nomeCitta;

@@ -43,6 +43,7 @@ public class WeatherUtils implements Serializable {
 	/*
 	 * Funzione che realizza la chiamata API, effettua il parsing
 	 * e popola il vettore di array JSON
+	 * // ok
 	 */
 	
 	public JSONObject chiamataAPI(String zipCode, boolean isObject) throws ParseException {

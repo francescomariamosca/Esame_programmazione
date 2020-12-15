@@ -32,6 +32,7 @@ public class DataSet{
 	public void saveInDataSet() throws IOException
 	{
 		try {
+			//per mettere nel file
 			name = new File("dataSet.txt");
 			if (name.exists()) {
 				FileOutputStream fos = new FileOutputStream("dataSet.txt");
