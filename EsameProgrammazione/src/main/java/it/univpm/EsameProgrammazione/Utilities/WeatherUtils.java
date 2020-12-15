@@ -77,12 +77,12 @@ public class WeatherUtils{
 			obj.put("humidity", main.get("humidity"));
 			obj.put("date", dtf.format(now));
 			
-			/*weather.setNomeCitta(objectJ.get("name").toString());
+			weather.setNomeCitta(objectJ.get("name").toString());
 			weather.setData(dtf.format(now));
 			weather.setTemperatura(Double.parseDouble(main.get("temp").toString()));
 			weather.setUmidita(Double.parseDouble(main.get("humidity").toString()));
 			dataSetArray.addWeather(weather);
-			*/
+			
 			return obj;
 		}
 		catch(IOException e) {

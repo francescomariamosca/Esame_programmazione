@@ -1,6 +1,7 @@
 package it.univpm.EsameProgrammazione.Utilities;
 import it.univpm.EsameProgrammazione.Model.*;
 
+import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,24 +19,28 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataSet{
 	protected Vector<Weather> weathers;
+	private ObjectOutputStream out;
 	
 	public DataSet() {
 		this.weathers = new Vector<Weather>();
+		try {
+			out = new ObjectOutputStream ( new BufferedOutputStream (
+					new FileOutputStream ("dataSet.txt")));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addWeather(Weather objectWeather) {
 		weathers.add(objectWeather);
-		weathers.toString();
 	}
 	
-	@Scheduled(fixedRate = 30000)
+	@Scheduled(fixedRate = 3000)
 	public void saveInDataSet() throws IOException
 	{
 		try {
-			FileOutputStream fos = new FileOutputStream("dataSet.txt");
-		    ObjectOutputStream oos = new ObjectOutputStream(fos);
-		    oos.writeObject(this.weathers);
-		    oos.close();
+			out . writeObject ( weathers );
+			out . close ();
 		}
 		catch(FileNotFoundException e) {
 			e.printStackTrace();
