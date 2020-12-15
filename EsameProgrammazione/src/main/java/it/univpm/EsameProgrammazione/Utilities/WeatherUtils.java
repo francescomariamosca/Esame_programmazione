@@ -1,27 +1,25 @@
 package it.univpm.EsameProgrammazione.Utilities;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;    
-import org.springframework.web.client.RestTemplate;
-
 import it.univpm.EsameProgrammazione.Model.Weather;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.net.URL;
+import java.net.URLConnection;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 /*
  * Classe che realizza le chiamate API
  * il parsing in JSON e popola il vettore di arrayJSON
  * che compone il DataSet
  */
 
-public class WeatherUtils{
+public class WeatherUtils implements Serializable {
 	protected String data;
 	protected JSONObject objectJ;
 	//protected JSONArray weathers;
@@ -77,12 +75,13 @@ public class WeatherUtils{
 			obj.put("humidity", main.get("humidity"));
 			obj.put("date", dtf.format(now));
 			
-			/*weather.setNomeCitta(objectJ.get("name").toString());
+			weather.setNomeCitta(objectJ.get("name").toString());
 			weather.setData(dtf.format(now));
 			weather.setTemperatura(Double.parseDouble(main.get("temp").toString()));
 			weather.setUmidita(Double.parseDouble(main.get("humidity").toString()));
 			dataSetArray.addWeather(weather);
-			*/
+
+
 			return obj;
 		}
 		catch(IOException e) {
