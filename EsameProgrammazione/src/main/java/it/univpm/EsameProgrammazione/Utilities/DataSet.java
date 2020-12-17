@@ -1,10 +1,12 @@
 package it.univpm.EsameProgrammazione.Utilities;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Vector;
 
 import it.univpm.EsameProgrammazione.Model.Weather;
@@ -18,19 +20,16 @@ import org.springframework.stereotype.Component;
  * Il DataSet è sul file esterno "DataSet.json"
  */
 @Component
-public class DataSet{
+public class DataSet implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected Vector<Weather> weathers;
-	
-	// private ObjectOutputStream out;
+	protected Weather weather = new Weather(0,0,0,"");
 	
 	public DataSet() {
 		this.weathers = new Vector<Weather>();
-		/*try {
-			out = new ObjectOutputStream ( new BufferedOutputStream (
-					new FileOutputStream ("dataSet.txt", true)));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}*/
 	}
 	
 	public void addWeather(Weather objectWeather) {
@@ -39,33 +38,21 @@ public class DataSet{
 
 		weathers.toString();
 	}
-	// Provino provetto provetta
+	
+	
 	File name;
 	@Scheduled(fixedRate = 30000)
 	public void saveInDataSet() throws IOException
 	{
-		try {
-			name = new File("dataSet.txt");
-			if (name.exists()) {
-				FileOutputStream fos = new FileOutputStream("dataSet.txt");
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(this.weathers);
-				oos.close();
-			}
-		}
-		catch(FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
 	   try {
 	      name = new File("dataSet.txt");
 	      if (name.exists()) {
-	         FileOutputStream fos = new FileOutputStream("dataSet.txt");
-	         ObjectOutputStream oos = new ObjectOutputStream(fos);
-	         oos.writeObject(this.weathers);
-	         oos.close();
+	    	  System.out.println("Prova");
+	    	  ObjectOutputStream out =
+	    			  new ObjectOutputStream ( new BufferedOutputStream (
+	    			  new FileOutputStream (name)));
+	    			  out . writeObject ( weather );
+	    			  out . close ();
 	      }
 	   }
 	   catch(FileNotFoundException e) {
@@ -74,6 +61,27 @@ public class DataSet{
 	   catch(IOException e) {
 	      e.printStackTrace();
 	   }
+	}
+
+	public Vector<Weather> getWeathers() {
+		return weathers;
+	}
+
+	public void setWeathers(Vector<Weather> weathers) {
+		this.weathers = weathers;
+	}
+	
+	public boolean isEmpty() {
+		if(this.weathers.isEmpty()) return true;
+		else return false;
+	}
+
+	public Weather getWeather() {
+		return weather;
+	}
+
+	public void setWeather(Weather weather) {
+		this.weather = weather;
 	}
 
 
