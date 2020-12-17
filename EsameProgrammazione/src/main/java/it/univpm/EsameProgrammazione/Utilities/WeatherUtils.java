@@ -1,6 +1,18 @@
 package it.univpm.EsameProgrammazione.Utilities;
 
 import it.univpm.EsameProgrammazione.Model.Weather;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.net.URL;
+import java.net.URLConnection;
+import java.time.format.DateTimeFormatter;
+import java.util.Vector;
+import java.time.LocalDateTime;    
+import org.springframework.web.client.RestTemplate;
+
+import it.univpm.EsameProgrammazione.Model.Weather;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -19,7 +31,10 @@ import java.time.format.DateTimeFormatter;
  * che compone il DataSet
  */
 
+
 public class WeatherUtils implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	protected String data;
 	protected JSONObject objectJ;
 	//protected JSONArray weathers;
@@ -27,7 +42,7 @@ public class WeatherUtils implements Serializable {
 	protected JSONParser parser;
 	protected JSONObject obj;
 	
-	protected DataSet dataSetArray;
+	// protected DataSet dataSetArray;
 	protected Weather weather;
 	
 	public WeatherUtils() {
@@ -36,7 +51,7 @@ public class WeatherUtils implements Serializable {
 		this.main = new JSONObject();
 		this.parser = new JSONParser();
 		this.obj = new JSONObject();
-		this.dataSetArray = new DataSet();
+		// this.dataSetArray = new DataSet();
 		this.weather = new Weather(0, 0, 0, "");
 	}
 	
@@ -46,7 +61,7 @@ public class WeatherUtils implements Serializable {
 	 * // ok
 	 */
 	
-	public JSONObject chiamataAPI(String zipCode, boolean isObject) throws ParseException {
+	public JSONObject chiamataAPI(String zipCode, DataSet dataSet, boolean flag) throws ParseException {
 		String url = "http://api.openweathermap.org/data/2.5/weather?zip="+zipCode+",it&appid=d35f43c24da97bb20f7a438c07178ae0";
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now(); 
@@ -59,16 +74,6 @@ public class WeatherUtils implements Serializable {
 			
 			RestTemplate connection = new RestTemplate();
 			data = connection.getForObject(url, String.class);
-			/*try {
-			   InputStreamReader inR = new InputStreamReader( in );
-			   BufferedReader buf = new BufferedReader( inR );
-			  
-			   while ( ( line = buf.readLine() ) != null ) {
-				   data+= line;
-			   }
-			} finally {
-				in.close();
-			}*/
 			objectJ = (JSONObject) parser.parse(data);
 			main = (JSONObject) objectJ.get("main");
 			obj.put("name", objectJ.get("name"));
@@ -80,9 +85,10 @@ public class WeatherUtils implements Serializable {
 			weather.setData(dtf.format(now));
 			weather.setTemperatura(Double.parseDouble(main.get("temp").toString()));
 			weather.setUmidita(Double.parseDouble(main.get("humidity").toString()));
-			dataSetArray.addWeather(weather);
-
-
+			
+			dataSet.setWeather(weather);
+			dataSet.addWeather(weather);
+			
 			return obj;
 		}
 		catch(IOException e) {
@@ -137,13 +143,5 @@ public class WeatherUtils implements Serializable {
 
 	public void setWeather(JSONObject obj) {
 		this.obj = obj;
-	}
-
-	public DataSet getDataSetArray() {
-		return dataSetArray;
-	}
-
-	public void setDataSetArray(DataSet dataSetArray) {
-		this.dataSetArray = dataSetArray;
 	}
 }
