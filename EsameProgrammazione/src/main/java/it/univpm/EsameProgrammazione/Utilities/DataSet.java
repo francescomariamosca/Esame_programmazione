@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.Vector;
 
 import it.univpm.EsameProgrammazione.Model.Weather;
@@ -20,11 +19,7 @@ import org.springframework.stereotype.Component;
  * Il DataSet è sul file esterno "DataSet.json"
  */
 @Component
-public class DataSet implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class DataSet{
 	protected Vector<Weather> weathers;
 	protected Weather weather = new Weather(0,0,0,"");
 	
@@ -79,9 +74,17 @@ public class DataSet implements Serializable{
 	public Weather getWeather() {
 		return weather;
 	}
-
+	// Birichino
 	public void setWeather(Weather weather) {
 		this.weather = weather;
+	}
+
+	public File getName() {
+		return name;
+	}
+
+	public void setName(File name) {
+		this.name = name;
 	}
 
 
