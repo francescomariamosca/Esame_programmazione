@@ -7,24 +7,12 @@ import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
 import java.time.format.DateTimeFormatter;
-import java.util.Vector;
 import java.time.LocalDateTime;    
 import org.springframework.web.client.RestTemplate;
-
-import it.univpm.EsameProgrammazione.Model.Weather;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
-import java.net.URL;
-import java.net.URLConnection;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 /*
  * Classe che realizza le chiamate API
  * il parsing in JSON e popola il vettore di arrayJSON

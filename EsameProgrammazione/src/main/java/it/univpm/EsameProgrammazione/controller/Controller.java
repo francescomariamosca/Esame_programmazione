@@ -23,7 +23,7 @@ public class Controller {
 	public String url = "";
 	public WeatherUtils callWeather = new WeatherUtils();
 	protected DataSet dataSet = new DataSet();
-	private DownloadDataSet down = new DownloadDataSet();
+	private DownloadDataSet download = new DownloadDataSet();
 	
 	/*
 	 * rotta di tipo GET per cercare informazioni relative alla temperatura e umidità
@@ -35,7 +35,7 @@ public class Controller {
 	public JSONObject getData(@RequestParam(name = "zipCode", defaultValue = "") String zipCode) throws ClassNotFoundException, IOException, ParseException {
 		boolean flag = false;
 		if(dataSet.isEmpty()) {
-			dataSet.setWeathers(down.DownloadArray());
+			dataSet.setWeathers(download.DownloadArray());
 			flag = true;
 		}
 		System.out.print(zipCode);
