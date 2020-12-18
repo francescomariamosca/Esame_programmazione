@@ -73,7 +73,7 @@ public class WeatherUtils implements Serializable {
 			weather.setTemperatura(Double.parseDouble(main.get("temp").toString()));
 			weather.setUmidita(Double.parseDouble(main.get("humidity").toString()));
 			
-			dataSet.setWeather(weather);
+			//dataSet.setWeather(weather);
 			dataSet.addWeather(weather);
 			
 			return obj;

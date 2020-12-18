@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataSet{
 	protected Vector<Weather> weathers;
-	protected Weather weather = new Weather(0,0,0,"");
+	//protected Weather weather = new Weather(0,0,0,"");
 	
 	public DataSet() {
 		this.weathers = new Vector<Weather>();
@@ -29,9 +29,6 @@ public class DataSet{
 	
 	public void addWeather(Weather objectWeather) {
 		weathers.add(objectWeather);
-
-
-		weathers.toString();
 	}
 	
 	
@@ -41,14 +38,13 @@ public class DataSet{
 	{
 	   try {
 	      name = new File("dataSet.txt");
-	      if (name.exists()) {
-	    	  System.out.println("Prova");
+	    	  System.out.println("Entrato nell'if prima del salvataggio");
 	    	  ObjectOutputStream out =
 	    			  new ObjectOutputStream ( new BufferedOutputStream (
 	    			  new FileOutputStream (name)));
-	    			  out . writeObject ( weather );
+	    			  out . writeObject ( weathers );
 	    			  out . close ();
-	      }
+	   
 	   }
 	   catch(FileNotFoundException e) {
 	      e.printStackTrace();
@@ -71,13 +67,13 @@ public class DataSet{
 		else return false;
 	}
 
-	public Weather getWeather() {
+	/*public Weather getWeather() {
 		return weather;
 	}
 	// Birichino
 	public void setWeather(Weather weather) {
 		this.weather = weather;
-	}
+	}*/
 
 	public File getName() {
 		return name;
@@ -86,6 +82,7 @@ public class DataSet{
 	public void setName(File name) {
 		this.name = name;
 	}
+
 
 
 }

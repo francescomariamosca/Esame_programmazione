@@ -21,6 +21,7 @@ public class Controller {
 	
 	public String API = "d35f43c24da97bb20f7a438c07178ae0";
 	public String url = "";
+	
 	public WeatherUtils callWeather = new WeatherUtils();
 	protected DataSet dataSet = new DataSet();
 	private DownloadDataSet download = new DownloadDataSet();
@@ -38,14 +39,13 @@ public class Controller {
 			dataSet.setWeathers(download.DownloadArray());
 			flag = true;
 		}
-		System.out.print(zipCode);
 		return callWeather.chiamataAPI(zipCode, dataSet, flag);
 	}
 	
-	@GetMapping("/pippo")
-	public String getArray() {
-		return dataSet.toString();
-	}
+	/*@GetMapping("/VisualizzaArray")
+	public void getArray() {
+		dataSet.stampa();
+	}*/
 	
 	/**
 	 * rotta per visualizzare i capoluoghi con i rispettivi zipCode
