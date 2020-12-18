@@ -42,10 +42,18 @@ public class Controller {
 		return callWeather.chiamataAPI(zipCode, dataSet, flag);
 	}
 	
-	/*@GetMapping("/VisualizzaArray")
+	@GetMapping("/VisualizzaArray")
 	public void getArray() {
-		dataSet.stampa();
-	}*/
+		String prova = dataSet.getWeathers().toString();
+		String citta0 = dataSet.getWeathers().get(0).getNomeCitta();
+		String citta1 = dataSet.getWeathers().get(1).getNomeCitta();
+		String citta2 = dataSet.getWeathers().get(2).getNomeCitta();
+		System.out.println(prova);
+		System.out.println(citta0);
+		System.out.println(citta1);
+		System.out.println(citta2);
+		System.out.println(dataSet.getWeathers().size());
+	}
 	
 	/**
 	 * rotta per visualizzare i capoluoghi con i rispettivi zipCode

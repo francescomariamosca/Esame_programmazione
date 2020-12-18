@@ -44,7 +44,7 @@ public class DataSet{
 	    			  new FileOutputStream (name)));
 	    			  out . writeObject ( weathers );
 	    			  out . close ();
-	   
+	    	  System.out.println("Fine salvataggio");
 	   }
 	   catch(FileNotFoundException e) {
 	      e.printStackTrace();
