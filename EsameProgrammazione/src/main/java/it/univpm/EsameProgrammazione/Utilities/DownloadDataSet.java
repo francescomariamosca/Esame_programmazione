@@ -13,23 +13,23 @@ import it.univpm.EsameProgrammazione.Model.Weather;
 
 public class DownloadDataSet {
 	protected  Vector<Weather> array = new Vector<Weather>();
-	private  File file;
+	
 	@SuppressWarnings("unchecked")
 	public  Vector<Weather> DownloadArray() {
-		file = new File("dataSet.txt");
-		Vector<Weather> provetta = null;
+		File file = new File("dataSet.txt");
+		
 	    try {
 	    	
-	    	System.out.println("Il file non esiste");
-	    	System.out.println("Entrato nell'if prima del download");
-	    	ObjectInputStream in =
-	    			new ObjectInputStream ( new BufferedInputStream (
-	    			new FileInputStream (file)));
-	    			provetta = (Vector < Weather >) in.readObject ();
-	    			String prova = array.toString();
-	    			System.out.println(prova);
-	    			in.close ();
-	    			System.out.println("Fine download");
+	    	if(file.exists() & file.canRead()) {
+	    		ObjectInputStream in =
+		    			new ObjectInputStream ( new BufferedInputStream (
+		    			new FileInputStream (file)));
+		    			array = (Vector < Weather >) in.readObject();
+		    			String prova = array.toString();
+		    			in.close ();
+		    			System.out.println("Fine download");
+		    			System.out.println(prova);
+	    	}		
 	    }
 	    catch(OptionalDataException e) {
 	    	e.printStackTrace();
@@ -44,7 +44,6 @@ public class DownloadDataSet {
 	    	e.printStackTrace();
 	    }
 	   
-	    array = provetta;
-	    return array;
+	    return this.array;
 	}
 }
