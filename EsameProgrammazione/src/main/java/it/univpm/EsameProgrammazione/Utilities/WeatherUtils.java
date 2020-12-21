@@ -39,7 +39,6 @@ public class WeatherUtils implements Serializable {
 		this.main = new JSONObject();
 		this.parser = new JSONParser();
 		this.obj = new JSONObject();
-		// this.dataSetArray = new DataSet();
 	}
 	
 	/*
@@ -69,12 +68,13 @@ public class WeatherUtils implements Serializable {
 			
 			weather = new Weather();
 			weather.setNomeCitta(objectJ.get("name").toString());
-			weather.setData(dtf.format(now));
+			weather.setData(now);
 			weather.setTemperatura(Double.parseDouble(main.get("temp").toString()));
 			weather.setUmidita(Double.parseDouble(main.get("humidity").toString()));
 			
 			String nome = weather.getNomeCitta();
 			System.out.println(nome);
+			System.out.println("Anno: "+ now.getYear() + "Mese: " + now.getMonthValue() + "Giorno: " + now.getDayOfMonth());
 			
 			dataSet.addWeather(weather);
 			

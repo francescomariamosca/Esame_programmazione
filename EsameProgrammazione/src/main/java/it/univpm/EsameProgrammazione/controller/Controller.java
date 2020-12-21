@@ -21,12 +21,15 @@ public class Controller {
 	
 	public WeatherUtils callWeather = new WeatherUtils();
 	public DataSet dataSet = new DataSet();
-	// Per salvare i dati ogni ora
 	Timer t = new Timer();
-	
 	
 	protected Vector<Weather> definitiva = new Vector<Weather>();
 	private DownloadDataSet download = new DownloadDataSet();
+	
+	
+	
+	
+	
 	
 	/*
 	 * rotta di tipo GET per cercare informazioni relative alla temperatura e umidità
