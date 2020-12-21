@@ -35,6 +35,12 @@ public class Filters {
         if (tipo == 1) {
             int giorno = now.getDayOfYear();
             giornaliero(dataSet,nomeCitta,giorno);
+        } else if(tipo == 7){
+            int giorno = now.getDayOfYear();
+            settimanale(dataSet,nomeCitta,giorno);
+        } else {
+            int giorno = now.getDayOfYear();
+            personalizzato(dataSet,nomeCitta,giorno,tipo);
         }
     }
 
@@ -48,6 +54,25 @@ public class Filters {
                 }
             }
         }
+
+        public void settimanale(DataSet dataSet, String nomeCitta, int giorno){
+            for (int i = 0; i < dataSet.getWeathers().size(); i++){
+                if (dataSet.getWeathers().get(i).getData().getDayOfYear() > (giorno-7) && dataSet.getWeathers().get(i).getNomeCitta().equals(nomeCitta)){
+                    temperatura.add(dataSet.getWeathers().get(i).getTemperatura());
+                    umidita.add(dataSet.getWeathers().get(i).getUmidita());
+                }
+            }
+        }
+
+        public void personalizzato(DataSet dataSet, String nomeCitta, int giorno, int range){
+            for (int i = 0; i < dataSet.getWeathers().size(); i++){
+                if (dataSet.getWeathers().get(i).getData().getDayOfYear() > (giorno-range) && dataSet.getWeathers().get(i).getNomeCitta().equals(nomeCitta)){
+                    temperatura.add(dataSet.getWeathers().get(i).getTemperatura());
+                    umidita.add(dataSet.getWeathers().get(i).getUmidita());
+                }
+            }
+        }
+
     public JSONObject statsTemperatura(String a) {//qual è il problema, il problema è...
         JSONObject object = new JSONObject();
         try {
