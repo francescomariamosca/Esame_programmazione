@@ -26,21 +26,21 @@ import org.json.simple.parser.ParseException;
 public class statstemperature {
 	String a;
 
-	Vector <Double> temperatura = new Vector <Double>();
-	Vector <Double> umidita = new Vector <Double>();
+	public Vector <Double> temperatura = new Vector <Double>();
+	public Vector <Double> umidita = new Vector <Double>();
 	double averageTemperature=0;
 	double averageHumidity=0;
 	double varianceTemperature=0;
 	double varianceHumidity=0;
 
 	@SuppressWarnings("unchecked")
-	public void caricaArrayTemperatura (DataSet dataset, String a) { 
-		for (int i=0; i<dataset.getWeathers().size();i++) {
+	public void caricaArrayTemperatura (DataSet dataSet, String a) {
+		for (int i=0; i<dataSet.getWeathers().size();i++) {
 			System.out.println("entrato nel for");
-		if (dataset.getWeathers().get(i).getNomeCitta().equals(a)) {
-		 temperatura.add(dataset.getWeathers().get(i).getTemperatura());  
+		if (dataSet.getWeathers().get(i).getNomeCitta().equals(a)) {
+		 temperatura.add(dataSet.getWeathers().get(i).getTemperatura());
 		}
-		} 
+		}
 		}	
 	
 	public void caricaArrayUmidita (DataSet dataSet, String a) {
