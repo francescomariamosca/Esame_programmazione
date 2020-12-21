@@ -23,13 +23,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataSet extends TimerTask{
 protected Vector<Weather> weathers = new Vector<Weather>();
-public String n = "Stringa iniziale prima del salvataggio";
-
-	public void addWeather(Weather objectWeather) {
-		weathers.add(objectWeather);
-		System.out.println(this.weathers.size());
-		n = "Stringa dopo aver aggiunto una chiamata all'array";
-	}
 	
 	/*@Scheduled(fixedRate = 5000)
 	public void saveInDataSet() throws IOException
@@ -59,7 +52,6 @@ public String n = "Stringa iniziale prima del salvataggio";
 	
 	@Override
 	public void run() {
-		System.out.println("size di weathers dentro allo Scheduled " + weathers.size() + "     " + n);
 		try {
 		      File name = new File("dataSet.txt");
 		    	  System.out.println("Entrato nell'if prima del salvataggio");
@@ -77,7 +69,10 @@ public String n = "Stringa iniziale prima del salvataggio";
 		   }
 	}
 	
-
+	
+	/*
+	 * Get and Setter vettore weathers
+	 */
 	
 	public Vector<Weather> getWeathers() {
 		return weathers;
@@ -87,6 +82,21 @@ public String n = "Stringa iniziale prima del salvataggio";
 		this.weathers = weathers;
 		System.out.println("size di weathers dopo il set: "+weathers.size());
 	}
+	
+	
+	/*
+	 * Aggiunge oggetto al vettore weathers
+	 */
+	
+	public void addWeather(Weather objectWeather) {
+		weathers.add(objectWeather);
+		System.out.println(this.weathers.size());
+		System.out.println("Mese della chiamata effettuata: " + this.weathers.get(1).getData().getDayOfMonth());
+	}
+	
+	/*
+	 * Check se il vettore weathers è vuoto
+	 */
 	
 	public boolean isEmpty() {
 		if(this.weathers.isEmpty()) return true;

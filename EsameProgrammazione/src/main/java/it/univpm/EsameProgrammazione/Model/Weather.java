@@ -1,22 +1,28 @@
 package it.univpm.EsameProgrammazione.Model;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /*
- * Classe che rappresenta il tempo di una chiamata
- * con le informazioni richieste
+ * Classe che rappresenta una chiamata e raccoglie
+ * le informazioni necessarie per le statistiche
  */
 
-import java.io.Serializable;
-
-public class Weather implements Serializable { // per serializzazione
+public class Weather implements Serializable {
 	private double temperatura;
 	private double umidita;
 	private String nomeCitta;
-	private String data;
+	private LocalDateTime data;
 	
 	public Weather() {
 		super();
 	}
 
+	
+	/*
+	 * Getters and Setters classe Weather
+	 */
+	
 	public double getTemperatura() {
 		return temperatura;
 	}
@@ -41,12 +47,12 @@ public class Weather implements Serializable { // per serializzazione
 		this.nomeCitta = nomeCitta;
 	}
 	
-	public String getData() {
+	public LocalDateTime getData() {
 		return data;
 	}
 	
-	public void setData(String data) {
-		this.data = data;
+	public void setData(LocalDateTime now) {
+		this.data = now;
 	}
 
 	
