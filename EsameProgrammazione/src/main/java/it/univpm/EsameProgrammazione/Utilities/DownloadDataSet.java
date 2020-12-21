@@ -11,6 +11,10 @@ import java.util.Vector;
 
 import it.univpm.EsameProgrammazione.Model.Weather;
 
+/*
+ * Classe che si occupa di caricare le informazioni
+ * del DataSet alla partenza 
+ */
 public class DownloadDataSet {
 	protected  Vector<Weather> array = new Vector<Weather>();
 	

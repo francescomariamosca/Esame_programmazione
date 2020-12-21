@@ -1,6 +1,7 @@
 package it.univpm.EsameProgrammazione.controller;
 
 import it.univpm.EsameProgrammazione.Dizionario.DizionarioImpl;
+import it.univpm.EsameProgrammazione.Exception.WeatherException;
 import it.univpm.EsameProgrammazione.Model.Weather;
 import it.univpm.EsameProgrammazione.Utilities.DataSet;
 import it.univpm.EsameProgrammazione.Utilities.DownloadDataSet;
@@ -21,12 +22,15 @@ public class Controller {
 	
 	public WeatherUtils callWeather = new WeatherUtils();
 	public DataSet dataSet = new DataSet();
-	// Per salvare i dati ogni ora
 	Timer t = new Timer();
-	
 	
 	protected Vector<Weather> definitiva = new Vector<Weather>();
 	private DownloadDataSet download = new DownloadDataSet();
+	
+	
+	
+	
+	
 	
 	/*
 	 * rotta di tipo GET per cercare informazioni relative alla temperatura e umidità
@@ -35,7 +39,7 @@ public class Controller {
 	 * @param il parametro richiesto è lo zipCode
 	 */
 	@GetMapping("/Cerca")
-	public JSONObject getData(@RequestParam(name = "zipCode", defaultValue = "") String zipCode) throws ClassNotFoundException, IOException, ParseException {
+	public JSONObject getData(@RequestParam(name = "zipCode", defaultValue = "") String zipCode) throws WeatherException, ParseException {
 		if(dataSet.isEmpty()) {
 			dataSet.setWeathers(download.DownloadArray());
 			// parte il timer per il salvataggio dei dati ogni ora
