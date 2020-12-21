@@ -6,23 +6,33 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.OptionalDataException;
 import java.util.Vector;
 
 import it.univpm.EsameProgrammazione.Model.Weather;
 
 public class DownloadDataSet {
 	protected  Vector<Weather> array = new Vector<Weather>();
-	private  File file;
+	
+	@SuppressWarnings("unchecked")
 	public  Vector<Weather> DownloadArray() {
-		file = new File("dataSet.txt");
+		File file = new File("dataSet.txt");
+		
 	    try {
-	    	if(file.exists()) {
-	    	ObjectInputStream in =
-	    			new ObjectInputStream ( new BufferedInputStream (
-	    			new FileInputStream (file)));
-	    			array = ( Vector < Weather >) in.readObject ();
-	    			in.close ();
-	    	}
+	    	
+	    	if(file.exists() & file.canRead()) {
+	    		ObjectInputStream in =
+		    			new ObjectInputStream ( new BufferedInputStream (
+		    			new FileInputStream (file)));
+		    			array = (Vector < Weather >) in.readObject();
+		    			String prova = array.toString();
+		    			in.close ();
+		    			System.out.println("Fine download");
+		    			System.out.println(prova);
+	    	}		
+	    }
+	    catch(OptionalDataException e) {
+	    	e.printStackTrace();
 	    }
 	    catch(FileNotFoundException e) {
 	    	e.printStackTrace();
@@ -33,6 +43,7 @@ public class DownloadDataSet {
 	    catch(ClassNotFoundException e) {
 	    	e.printStackTrace();
 	    }
-	    return array;
+	   
+	    return this.array;
 	}
 }

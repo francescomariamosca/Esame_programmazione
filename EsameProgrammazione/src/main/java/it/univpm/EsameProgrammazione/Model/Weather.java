@@ -13,7 +13,7 @@ public class Weather implements Serializable { // per serializzazione
 	private String nomeCitta;
 	private String data;
 	
-	public Weather(double temp, double umi, int zip, String citta) {
+	public Weather() {
 		super();
 	}
 

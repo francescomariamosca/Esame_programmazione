@@ -31,7 +31,7 @@ public class WeatherUtils implements Serializable {
 	protected JSONObject obj;
 	
 	// protected DataSet dataSetArray;
-	protected Weather weather;
+	public Weather weather;
 	
 	public WeatherUtils() {
 		this.data = "";
@@ -40,7 +40,6 @@ public class WeatherUtils implements Serializable {
 		this.parser = new JSONParser();
 		this.obj = new JSONObject();
 		// this.dataSetArray = new DataSet();
-		this.weather = new Weather(0, 0, 0, "");
 	}
 	
 	/*
@@ -49,7 +48,7 @@ public class WeatherUtils implements Serializable {
 	 * // ok
 	 */
 	
-	public JSONObject chiamataAPI(String zipCode, DataSet dataSet, boolean flag) throws ParseException {
+	public JSONObject chiamataAPI(String zipCode, DataSet dataSet) throws ParseException {
 		String url = "http://api.openweathermap.org/data/2.5/weather?zip="+zipCode+",it&appid=d35f43c24da97bb20f7a438c07178ae0";
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now(); 
@@ -69,12 +68,15 @@ public class WeatherUtils implements Serializable {
 			obj.put("humidity", main.get("humidity"));
 			obj.put("date", dtf.format(now));
 			
+			weather = new Weather();
 			weather.setNomeCitta(objectJ.get("name").toString());
 			weather.setData(dtf.format(now));
 			weather.setTemperatura(Double.parseDouble(main.get("temp").toString()));
 			weather.setUmidita(Double.parseDouble(main.get("humidity").toString()));
 			
-			//dataSet.setWeather(weather);
+			String nome = weather.getNomeCitta();
+			System.out.println(nome);
+			
 			dataSet.addWeather(weather);
 			
 			return obj;

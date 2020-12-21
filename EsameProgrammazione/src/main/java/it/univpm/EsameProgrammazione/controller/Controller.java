@@ -7,7 +7,7 @@ import it.univpm.EsameProgrammazione.Utilities.DownloadDataSet;
 import it.univpm.EsameProgrammazione.Utilities.WeatherUtils;
 
 import java.io.IOException;
-import java.util.Vector;
+import java.util.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Controller {
 	
-	public String API = "d35f43c24da97bb20f7a438c07178ae0";
-	public String url = "";
-	
 	public WeatherUtils callWeather = new WeatherUtils();
-	protected DataSet dataSet = new DataSet();
+	public DataSet dataSet = new DataSet();
+	// Per salvare i dati ogni ora
+	Timer t = new Timer();
+	
+	
+	protected Vector<Weather> definitiva = new Vector<Weather>();
 	private DownloadDataSet download = new DownloadDataSet();
 	
 	/*
@@ -34,18 +36,20 @@ public class Controller {
 	 */
 	@GetMapping("/Cerca")
 	public JSONObject getData(@RequestParam(name = "zipCode", defaultValue = "") String zipCode) throws ClassNotFoundException, IOException, ParseException {
-		boolean flag = false;
 		if(dataSet.isEmpty()) {
 			dataSet.setWeathers(download.DownloadArray());
-			flag = true;
+			// parte il timer per il salvataggio dei dati ogni ora
+			t.scheduleAtFixedRate(dataSet, 0, 30*1000);
 		}
-		return callWeather.chiamataAPI(zipCode, dataSet, flag);
+		return callWeather.chiamataAPI(zipCode, dataSet);
 	}
 	
-	/*@GetMapping("/VisualizzaArray")
+	@GetMapping("/vedi")
 	public void getArray() {
-		dataSet.stampa();
-	}*/
+		for(int i=0; i<dataSet.getWeathers().size(); i++) {
+			System.out.println(dataSet.getWeathers().get(i).getNomeCitta());
+		}
+	}
 	
 	/**
 	 * rotta per visualizzare i capoluoghi con i rispettivi zipCode
