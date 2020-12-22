@@ -17,6 +17,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * classe controller che gestisce tutte le chiamate
+ */
 @RestController
 public class Controller {
 
@@ -28,15 +31,12 @@ public class Controller {
 	private DownloadDataSet download = new DownloadDataSet();
 
 
-	
-	
-	
-
-	/*
+	/**
+	 *
 	 * rotta di tipo GET per cercare informazioni relative alla temperatura e umidità
 	 * partendo dallo zipCode
 	 * @return ritorna un JSONObject con le informazioni richieste
-	 * @param il parametro richiesto è lo zipCode
+	 * @param zipCode il parametro richiesto è lo zipCode
 	 */
 	@GetMapping("/Cerca")
 	public JSONObject getData(@RequestParam(name = "zipCode", defaultValue = "") String zipCode) throws WeatherException, ParseException {
@@ -83,6 +83,11 @@ public class Controller {
 		return cittaSottostringa;
 	}
 
+	/**
+	 * rotta per visualizzare le statistiche.
+	 * @param nomecitta nome della citta cercata
+	 * @return JSONArray delle statistiche
+	 */
 	@GetMapping("/Stats")
 	public JSONArray getStatistiche(@RequestParam(name = "nomeCitta", defaultValue = "") String nomecitta) throws ClassNotFoundException, IOException, ParseException{
 		if (dataSet.isEmpty()) {
@@ -99,6 +104,11 @@ public class Controller {
 		return statistiche;
 	}
 
+	/**
+	 * rotta per visualizzare le statistiche tramite dei range(giornaliero, settimanale, personalizzabile)
+	 * @param infoFilter body contenente il nome e il tipo del range
+	 * @return JSONArray delle statistiche
+	 */
 	@PostMapping("/Filters")
 	public JSONArray getFilters(@RequestBody JSONObject infoFilter) {
 		if (dataSet.isEmpty()) {

@@ -14,6 +14,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Vector;
 import it.univpm.EsameProgrammazione.stats.statstemperature;
+
+/**
+ * classe che si occupa della gstione dei filtri
+ */
+
 public class Filters {
 
 
