@@ -34,7 +34,7 @@ public class Statstemperature {
 		 temperatura.add(dataSet.getWeathers().get(i).getTemperatura());
 		}
 		}
-		}	
+	}	
 	
 	public void caricaArrayUmidita (DataSet dataSet, String a) {
 		for (int i=0; i< dataSet.getWeathers().size();i++) {
