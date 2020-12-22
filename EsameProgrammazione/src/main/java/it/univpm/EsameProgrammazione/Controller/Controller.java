@@ -1,4 +1,4 @@
-package it.univpm.EsameProgrammazione.controller;
+package it.univpm.EsameProgrammazione.Controller;
 
 import it.univpm.EsameProgrammazione.Dizionario.DizionarioImpl;
 import it.univpm.EsameProgrammazione.Exception.WeatherException;
@@ -11,14 +11,20 @@ import it.univpm.EsameProgrammazione.Utilities.WeatherUtils;
 import java.io.IOException;
 import java.util.*;
 
-import it.univpm.EsameProgrammazione.stats.statstemperature;
+import it.univpm.EsameProgrammazione.Stats.Statstemperature;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * classe controller che gestisce tutte le chiamate
+ * @author Francesco Maria Mosca
+ * @author Dennis Pierantozzi
+ * @author Nicola Mochi
+ *
+ *
+ *
+ * Classe controller che gestisce tutte le chiamate
  */
 @RestController
 public class Controller {
@@ -95,7 +101,7 @@ public class Controller {
 			// parte il timer per il salvataggio dei dati ogni ora
 			t.scheduleAtFixedRate(dataSet, 0, 30 * 1000);
 		}
-		statstemperature stats = new statstemperature();
+		Statstemperature stats = new Statstemperature();
 		JSONArray statistiche = new JSONArray();
 		stats.caricaArrayTemperatura(dataSet, nomecitta);
 		stats.caricaArrayUmidita(dataSet, nomecitta);

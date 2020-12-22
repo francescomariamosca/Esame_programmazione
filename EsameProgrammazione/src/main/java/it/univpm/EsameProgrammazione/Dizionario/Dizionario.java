@@ -1,6 +1,10 @@
 package it.univpm.EsameProgrammazione.Dizionario;
 
 /**
+ * @author Francesco Maria Mosca
+ * @author Dennis Pierantozzi
+ * @author Nicola Mochi
+ *
  * Classe contente gli attributi del dizionario e i getter/setter
  */
 public  class Dizionario {

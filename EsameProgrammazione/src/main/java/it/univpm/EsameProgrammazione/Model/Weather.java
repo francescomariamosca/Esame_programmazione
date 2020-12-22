@@ -3,7 +3,12 @@ package it.univpm.EsameProgrammazione.Model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/*
+/**
+ * @author Francesco Maria Mosca
+ * @author Dennis Pierantozzi
+ * @author Nicola Mochi
+ *
+ *
  * Classe che rappresenta una chiamata e raccoglie
  * le informazioni necessarie per le statistiche
  */
@@ -19,7 +24,7 @@ public class Weather implements Serializable {
 	}
 
 	
-	/*
+	/**
 	 * Getters and Setters classe Weather
 	 */
 	

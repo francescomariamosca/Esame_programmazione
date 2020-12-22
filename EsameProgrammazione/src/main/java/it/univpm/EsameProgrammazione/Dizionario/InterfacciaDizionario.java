@@ -3,17 +3,20 @@ package it.univpm.EsameProgrammazione.Dizionario;
 import org.json.simple.JSONArray;
 
 /**
+ * @author Francesco Maria Mosca
+ * @author Dennis Pierantozzi
+ * @author Nicola Mochi
+ *
  * interfaccia del dizionario
  */
 public interface InterfacciaDizionario {
 
     /**
-     * popola la HashMap dal file capoluoghi.txt
+     * popola il vettore dizionario
      */
      void popolaDizionario();
 
     /**
-     *
      * @return ritona un jsonArray contenente tutti i capoluoghi con i rispettivi zipCode.
      */
     JSONArray visualizzaDizionario();

@@ -91,7 +91,6 @@ protected Vector<Weather> weathers = new Vector<Weather>();
 	public void addWeather(Weather objectWeather) {
 		weathers.add(objectWeather);
 		System.out.println(this.weathers.size());
-		System.out.println("Mese della chiamata effettuata: " + this.weathers.get(1).getData().getDayOfMonth());
 	}
 	
 	/*

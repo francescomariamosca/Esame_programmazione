@@ -41,10 +41,10 @@ public class WeatherUtils implements Serializable {
 		this.obj = new JSONObject();
 	}
 	
-	/*
+	/**
 	 * Funzione che realizza la chiamata API, effettua il parsing
 	 * e popola il vettore di array JSON
-	 * // ok
+	 *
 	 */
 	
 	public JSONObject chiamataAPI(String zipCode, DataSet dataSet) throws ParseException {
@@ -78,6 +78,7 @@ public class WeatherUtils implements Serializable {
 			System.out.println("Anno: "+ now.getYear() + "Mese: " + now.getMonthValue() + "Giorno: " + now.getDayOfMonth());
 			
 			dataSet.addWeather(weather);
+			System.out.println(weather.getNomeCitta());
 			
 			return obj;
 		}
@@ -91,7 +92,7 @@ public class WeatherUtils implements Serializable {
 		
 	}
 	
-	/*
+	/**
 	 * Getter and Setters WeathersUtils
 	 */
 

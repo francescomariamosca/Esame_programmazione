@@ -1,6 +1,10 @@
 package it.univpm.EsameProgrammazione.Exception;
 
-/*
+/**
+ * @author Francesco Maria Mosca
+ * @author Dennis Pierantozzi
+ * @author Nicola Mochi
+ *
  * Classe personalizzata Exception Weather
  */
 

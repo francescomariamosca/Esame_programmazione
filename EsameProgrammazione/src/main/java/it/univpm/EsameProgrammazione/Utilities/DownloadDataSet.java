@@ -11,7 +11,7 @@ import java.util.Vector;
 
 import it.univpm.EsameProgrammazione.Model.Weather;
 
-/*
+/**
  * Classe che si occupa di caricare le informazioni
  * del DataSet alla partenza 
  */

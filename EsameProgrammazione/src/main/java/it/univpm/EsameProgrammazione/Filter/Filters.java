@@ -1,21 +1,17 @@
 package it.univpm.EsameProgrammazione.Filter;
 
 import it.univpm.EsameProgrammazione.Utilities.DataSet;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.xml.crypto.Data;
-import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Vector;
-import it.univpm.EsameProgrammazione.stats.statstemperature;
 
 /**
+ * @author Francesco Maria Mosca
+ * @author Dennis Pierantozzi
+ * @author Nicola Mochi
+ *
  * classe che si occupa della gstione dei filtri
  */
 
@@ -31,11 +27,8 @@ public class Filters {
 
     LocalDateTime now = LocalDateTime.now();
 
-    // passo a questa funzione il filtro inserito dall'utente(giornaliero, sett)
-    // il rang personalazzibaile mi da direttamente un valore numerico
-    // e lo converto in un valore numerico
+    // passo a questa funzione il filtro inserito dall'utente(giornaliero, sett) in base sl numero
     public void tipoFiltro(DataSet dataSet, int tipo, String nomeCitta) {
-        String tempo;
 
         if (tipo == 1) {
             int giorno = now.getDayOfYear();
@@ -49,8 +42,6 @@ public class Filters {
         }
     }
 
-        // la funzione per il settimanle sarà la stesse del range personalizzabile, bast solo impostare
-        // il range a 7 giorni
         public void giornaliero(DataSet dataSet, String nomeCitta, int giorno){
             for (int i = 0; i < dataSet.getWeathers().size(); i++) {
                 if (dataSet.getWeathers().get(i).getData().getDayOfYear() == giorno && dataSet.getWeathers().get(i).getNomeCitta().equals(nomeCitta)){

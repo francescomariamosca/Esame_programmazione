@@ -4,7 +4,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-// per scheduling
+/**
+ * @author Francesco Maria Mosca
+ * @author Dennis Pierantozzi
+ * @author Nicola Mochi
+ *
+ * Run della spring boot application per far partire il programma
+ */
 @SpringBootApplication
 @EnableScheduling
 public class EsameProgrammazioneApplication{

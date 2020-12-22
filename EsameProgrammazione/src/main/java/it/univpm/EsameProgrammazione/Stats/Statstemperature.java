@@ -1,29 +1,22 @@
-package it.univpm.EsameProgrammazione.stats;
+package it.univpm.EsameProgrammazione.Stats;
 
-import it.univpm.EsameProgrammazione.*;
-import it.univpm.EsameProgrammazione.Model.Weather;
 import it.univpm.EsameProgrammazione.Utilities.DataSet;
 
 
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Vector;
-import java.time.LocalDateTime;
-
-import org.springframework.boot.system.SystemProperties;
-import org.springframework.web.client.RestTemplate;
 
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-
-public class statstemperature {
+/**
+ * @author Francesco Maria Mosca
+ * @author Dennis Pierantozzi
+ * @author Nicola Mochi
+ *
+ * Classe che si occupa della gestione delle statistiche
+ */
+public class Statstemperature {
 	String a;
 
 	public Vector <Double> temperatura = new Vector <Double>();
@@ -114,4 +107,3 @@ public class statstemperature {
 
 }
 
-//domani faccio medie e varianze e metto tutto assieme, ovvero chiamo tutto da una sola funzione 

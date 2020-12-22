@@ -10,7 +10,12 @@ import java.util.Scanner;
 import java.util.Vector;
 
 /**
- * Classe che si occupa dell' implementazione dei metodi astratti della classe dizionario
+ * @author Francesco Maria Mosca
+ * @author Dennis Pierantozzi
+ * @author Nicola Mochi
+ *
+ *
+ * Classe che si occupa dell' implementazione dei metodi  dell' interfaccia dizionario
  *
  */
 public class DizionarioImpl implements InterfacciaDizionario{
