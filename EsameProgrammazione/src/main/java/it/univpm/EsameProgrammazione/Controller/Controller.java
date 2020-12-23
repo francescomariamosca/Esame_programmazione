@@ -1,6 +1,7 @@
 package it.univpm.EsameProgrammazione.Controller;
 
 import it.univpm.EsameProgrammazione.Dizionario.DizionarioImpl;
+import it.univpm.EsameProgrammazione.Exception.StatsException;
 import it.univpm.EsameProgrammazione.Exception.WeatherException;
 import it.univpm.EsameProgrammazione.Filter.Filters;
 import it.univpm.EsameProgrammazione.Model.Weather;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class Controller {
 
+	private static final Exception StatsException = null;
 	public WeatherUtils callWeather = new WeatherUtils();
 	public DataSet dataSet = new DataSet();
 	Timer t = new Timer();
@@ -93,9 +95,11 @@ public class Controller {
 	 * rotta per visualizzare le statistiche.
 	 * @param nomecitta nome della citta cercata
 	 * @return JSONArray delle statistiche
+	 * @throws WeatherException 
+	 * @throws StatsException 
 	 */
 	@GetMapping("/Stats")
-	public JSONArray getStatistiche(@RequestParam(name = "nomeCitta", defaultValue = "") String nomecitta) throws ClassNotFoundException, IOException, ParseException{
+	public JSONArray getStatistiche(@RequestParam(name = "nomeCitta", defaultValue = "") String nomecitta) throws StatsException{
 		if (dataSet.isEmpty()) {
 			dataSet.setWeathers(download.DownloadArray());
 			// parte il timer per il salvataggio dei dati ogni ora
@@ -103,7 +107,7 @@ public class Controller {
 		}
 		Statstemperature stats = new Statstemperature();
 		JSONArray statistiche = new JSONArray();
-		stats.caricaArrayTemperatura(dataSet, nomecitta);
+		stats.caricaArrayTemperatura(dataSet, nomecitta); 
 		stats.caricaArrayUmidita(dataSet, nomecitta);
 		statistiche.add(stats.statsTemperatura(nomecitta));
 		statistiche.add(stats.statsUmidita(nomecitta));

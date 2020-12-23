@@ -1,5 +1,5 @@
 /**
- * package con la classe che si occupa della gestione delle eccezioni
+ * package con le classi che si occupano della gestione delle eccezioni personalizzate
  */
 
 package it.univpm.EsameProgrammazione.Exception;

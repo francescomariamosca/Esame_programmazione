@@ -1,5 +1,6 @@
 package it.univpm.EsameProgrammazione.Utilities;
 
+import it.univpm.EsameProgrammazione.Exception.WeatherException;
 import it.univpm.EsameProgrammazione.Model.Weather;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,10 +45,11 @@ public class WeatherUtils implements Serializable {
 	/**
 	 * Funzione che realizza la chiamata API, effettua il parsing
 	 * e popola il vettore di array JSON
+	 * @throws WeatherException 
 	 *
 	 */
 	
-	public JSONObject chiamataAPI(String zipCode, DataSet dataSet) throws ParseException {
+	public JSONObject chiamataAPI(String zipCode, DataSet dataSet) throws ParseException, WeatherException {
 		String url = "http://api.openweathermap.org/data/2.5/weather?zip="+zipCode+",it&appid=d35f43c24da97bb20f7a438c07178ae0";
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now(); 
@@ -62,6 +64,9 @@ public class WeatherUtils implements Serializable {
 			data = connection.getForObject(url, String.class);
 			objectJ = (JSONObject) parser.parse(data);
 			main = (JSONObject) objectJ.get("main");
+			
+			if(objectJ.isEmpty()) throw new WeatherException();
+			
 			obj.put("name", objectJ.get("name"));
 			obj.put("temperature", main.get("temp"));
 			obj.put("humidity", main.get("humidity"));

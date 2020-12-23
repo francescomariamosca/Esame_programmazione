@@ -1,13 +1,14 @@
 package it.univpm.EsameProgrammazione.Stats;
 
+import it.univpm.EsameProgrammazione.Exception.StatsException;
+import it.univpm.EsameProgrammazione.Exception.WeatherException;
 import it.univpm.EsameProgrammazione.Utilities.DataSet;
 
-
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Vector;
-
-
 import org.json.simple.JSONObject;
+
 
 /**
  * @author Francesco Maria Mosca
@@ -25,20 +26,19 @@ public class Statstemperature {
 	double averageHumidity=0;
 	double varianceTemperature=0;
 	double varianceHumidity=0;
+	JSONObject object = new JSONObject();
 
 	@SuppressWarnings("unchecked")
 	public void caricaArrayTemperatura (DataSet dataSet, String a) {
-		for (int i=0; i<dataSet.getWeathers().size();i++) {
-			System.out.println("entrato nel for");
-		if (dataSet.getWeathers().get(i).getNomeCitta().equals(a)) {
-		 temperatura.add(dataSet.getWeathers().get(i).getTemperatura());
-		}
+		for (int i=0; i<dataSet.getWeathers().size();i++)  {
+			if (dataSet.getWeathers().get(i).getNomeCitta().equals(a)) {
+				temperatura.add(dataSet.getWeathers().get(i).getTemperatura());
+			}
 		}
 	}	
 	
 	public void caricaArrayUmidita (DataSet dataSet, String a) {
 		for (int i=0; i< dataSet.getWeathers().size();i++) {
-			System.out.println("entrato nel for di umidita");
 			if (dataSet.getWeathers().get(i).getNomeCitta().equals(a)) {
 				umidita.add(dataSet.getWeathers().get(i).getUmidita());
 			}
@@ -46,8 +46,7 @@ public class Statstemperature {
 	}
 		
 	public JSONObject statsTemperatura(String a) {//qual è il problema, il problema è...
-		JSONObject object = new JSONObject();
-		try {	
+		try {
 			Object maxT = Collections.max(temperatura);
 			object.put("Temperatura massima:", maxT);
 			Object minT = Collections.min(temperatura);
@@ -66,16 +65,16 @@ public class Statstemperature {
 			}
 			
 			object.put("La varianza:", varianceTemperature);
-			
-			}
-		 catch (Exception e) {
-				System.out.println("Nome non presente, non è possibile ottenere la temperatura");
+		}catch(Exception e) {
+			object.put("errore messaggio", e.getMessage());
+			object.put("errore causa", e.getCause());
 		}
-				return object;
+			return object;
+			
 	}
 	
 	public JSONObject statsUmidita (String a) {
-		JSONObject object = new JSONObject();
+		//JSONObject object = new JSONObject();
 		try {
 			Object maxU = Collections.max(umidita);
 			object.put("Umidità massima:", maxU);
@@ -95,13 +94,20 @@ public class Statstemperature {
 			}
 			
 			object.put("La varianza per l'umidita:", varianceHumidity);
-		
-			
-		} catch (Exception e) {
-			System.out.println("Nome non presente, riprovare");
+		}catch(Exception e) {
+			object.put("errore", e.getMessage());
+			object.put("errore", e.getCause());
 		}
 		
 		return object;
+	}
+
+	public JSONObject getObject() {
+		return object;
+	}
+
+	public void setObject(JSONObject object) {
+		this.object = object;
 	}
 	
 

@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * Run della spring boot application per far partire il programma
  */
 @SpringBootApplication
-@EnableScheduling
 public class EsameProgrammazioneApplication{
 
 	public static void main(String[] args) {

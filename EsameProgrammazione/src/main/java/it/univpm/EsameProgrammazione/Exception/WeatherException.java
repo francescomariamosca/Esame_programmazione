@@ -10,6 +10,11 @@ package it.univpm.EsameProgrammazione.Exception;
 
 public class WeatherException extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public WeatherException() {
 		super();
 		System.out.println("PROBLEMA DURANTE CREAZIONE CHIAMATA API");
