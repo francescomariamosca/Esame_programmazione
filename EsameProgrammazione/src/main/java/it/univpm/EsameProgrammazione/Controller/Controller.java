@@ -1,21 +1,22 @@
 package it.univpm.EsameProgrammazione.Controller;
 
 import it.univpm.EsameProgrammazione.Dizionario.DizionarioImpl;
-import it.univpm.EsameProgrammazione.Exception.StatsException;
-import it.univpm.EsameProgrammazione.Exception.WeatherException;
+import it.univpm.EsameProgrammazione.Exception.NoBodyException;
+import it.univpm.EsameProgrammazione.Exception.NoDataException;
 import it.univpm.EsameProgrammazione.Filter.Filters;
 import it.univpm.EsameProgrammazione.Model.Weather;
 import it.univpm.EsameProgrammazione.Utilities.DataSet;
 import it.univpm.EsameProgrammazione.Utilities.DownloadDataSet;
 import it.univpm.EsameProgrammazione.Utilities.WeatherUtils;
 
-import java.io.IOException;
 import java.util.*;
 
 import it.univpm.EsameProgrammazione.Stats.Statstemperature;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -30,7 +31,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class Controller {
 
-	private static final Exception StatsException = null;
 	public WeatherUtils callWeather = new WeatherUtils();
 	public DataSet dataSet = new DataSet();
 	Timer t = new Timer();
@@ -47,7 +47,7 @@ public class Controller {
 	 * @param zipCode il parametro richiesto è lo zipCode
 	 */
 	@GetMapping("/Cerca")
-	public JSONObject getData(@RequestParam(name = "zipCode", defaultValue = "") String zipCode) throws WeatherException, ParseException {
+	public JSONObject getData(@RequestParam(name = "zipCode", defaultValue = "") String zipCode) throws ParseException {
 		if (dataSet.isEmpty()) {
 			dataSet.setWeathers(download.DownloadArray());
 			// parte il timer per il salvataggio dei dati ogni ora
@@ -95,11 +95,12 @@ public class Controller {
 	 * rotta per visualizzare le statistiche.
 	 * @param nomecitta nome della citta cercata
 	 * @return JSONArray delle statistiche
-	 * @throws WeatherException 
+	 * @throws NoDataException 
+	 * @throws NoDataSet 
 	 * @throws StatsException 
 	 */
 	@GetMapping("/Stats")
-	public JSONArray getStatistiche(@RequestParam(name = "nomeCitta", defaultValue = "") String nomecitta) throws StatsException{
+	public JSONArray getStatistiche(@RequestParam(name = "nomeCitta", defaultValue = "") String nomecitta) throws NoDataException  {
 		if (dataSet.isEmpty()) {
 			dataSet.setWeathers(download.DownloadArray());
 			// parte il timer per il salvataggio dei dati ogni ora
@@ -113,19 +114,42 @@ public class Controller {
 		statistiche.add(stats.statsUmidita(nomecitta));
 		return statistiche;
 	}
+	
+	/*
+	 * Messaggio NoDataException
+	 */
+	@ExceptionHandler(NoDataException.class)
+	public ResponseEntity<Object> handleIOException(NoDataException e) {
+		return new ResponseEntity<>(DomainError(), HttpStatus.BAD_REQUEST);
+	}
+	public <Object> String DomainError()
+	{
+		return "Non ci sono dati nel dataSet, riprovare con il nome di un'altra città.";
+	}
+	@ExceptionHandler(NoBodyException.class)
+	public ResponseEntity<Object> handleIOException(NoBodyException e) {
+		return new ResponseEntity<>(BodyError(), HttpStatus.BAD_REQUEST);
+	}
+	public <Object> String BodyError()
+	{
+		return "Il body della richiesta è vuoto. Riempilo correttamente e riprova.";
+	}
 
 	/**
 	 * rotta per visualizzare le statistiche tramite dei range(giornaliero, settimanale, personalizzabile)
 	 * @param infoFilter body contenente il nome e il tipo del range
 	 * @return JSONArray delle statistiche
+	 * @throws NoBodyException 
+	 * @throws NoDataSet 
 	 */
 	@PostMapping("/Filters")
-	public JSONArray getFilters(@RequestBody JSONObject infoFilter) {
+	public JSONArray getFilters(@RequestBody JSONObject infoFilter) throws NoBodyException  {
 		if (dataSet.isEmpty()) {
 			dataSet.setWeathers(download.DownloadArray());
 			// parte il timer per il salvataggio dei dati ogni ora
 			t.scheduleAtFixedRate(dataSet, 0, 30 * 1000);
 		}
+		if(infoFilter.isEmpty()) throw new NoBodyException();
 		Filters filtri = new Filters();
 		JSONArray filters = new JSONArray();
 		String nomeCitta = (String) infoFilter.get("name");

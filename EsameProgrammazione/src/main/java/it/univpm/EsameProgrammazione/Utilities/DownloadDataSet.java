@@ -19,7 +19,7 @@ public class DownloadDataSet {
 	protected  Vector<Weather> array = new Vector<Weather>();
 	
 	@SuppressWarnings("unchecked")
-	public  Vector<Weather> DownloadArray() {
+	public  Vector<Weather> DownloadArray()  {
 		File file = new File("dataSet.txt");
 		
 	    try {
@@ -29,11 +29,9 @@ public class DownloadDataSet {
 		    			new ObjectInputStream ( new BufferedInputStream (
 		    			new FileInputStream (file)));
 		    			array = (Vector < Weather >) in.readObject();
-		    			String prova = array.toString();
 		    			in.close ();
 		    			System.out.println("Fine download");
-		    			System.out.println(prova);
-	    	}		
+	    	}
 	    }
 	    catch(OptionalDataException e) {
 	    	e.printStackTrace();

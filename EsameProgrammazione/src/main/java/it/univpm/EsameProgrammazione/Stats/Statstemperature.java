@@ -1,10 +1,8 @@
 package it.univpm.EsameProgrammazione.Stats;
 
-import it.univpm.EsameProgrammazione.Exception.StatsException;
-import it.univpm.EsameProgrammazione.Exception.WeatherException;
+import it.univpm.EsameProgrammazione.Exception.NoDataException;
 import it.univpm.EsameProgrammazione.Utilities.DataSet;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Vector;
 import org.json.simple.JSONObject;
@@ -29,12 +27,14 @@ public class Statstemperature {
 	JSONObject object = new JSONObject();
 
 	@SuppressWarnings("unchecked")
-	public void caricaArrayTemperatura (DataSet dataSet, String a) {
+	public void caricaArrayTemperatura (DataSet dataSet, String a) throws NoDataException{
 		for (int i=0; i<dataSet.getWeathers().size();i++)  {
 			if (dataSet.getWeathers().get(i).getNomeCitta().equals(a)) {
 				temperatura.add(dataSet.getWeathers().get(i).getTemperatura());
 			}
 		}
+		if (this.temperatura.isEmpty() || this.temperatura.contains("[]"))
+			throw new NoDataException();
 	}	
 	
 	public void caricaArrayUmidita (DataSet dataSet, String a) {
@@ -65,6 +65,7 @@ public class Statstemperature {
 			}
 			
 			object.put("La varianza:", varianceTemperature);
+
 		}catch(Exception e) {
 			object.put("errore messaggio", e.getMessage());
 			object.put("errore causa", e.getCause());

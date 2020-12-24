@@ -117,7 +117,7 @@ public class Filters {
             for (int i=0; i<umidita.size(); i++) {
                 varianceHumidity += Math.pow(umidita.get(i)-averageHumidity ,2);
             }
-
+            
             object.put("La varianza per l'umidita:", varianceHumidity);
 
 
