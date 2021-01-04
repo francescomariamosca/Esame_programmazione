@@ -22,16 +22,50 @@ Permette la visione di statistiche personalizzabili con filtri, la ricerca per n
 | Amministatore | Fornisce la lista dei capoluoghi |
 | Utente | Utente del servizio |
 
+## Come funziona
+Scaricando il file zip del progetto e importandolo in un IDE (quale Eclipse ad esempio), il programma sarà pronto all'utilizzo.
+Una volta eseguito possono essere richiamate le rotte programmate (e descritte nelle prossime righe in dettaglio) attraverso un browser o un programma apposito quale Postman.
+Il programma ogni ora salverà all'interno del file serializzato "dataSet.txt" le chiamate effettuate all'API di OpenWeather così da averle a disposizione al seguente avvio. I dati verranno utilizzati per le richieste inerenti le statistiche e i filtri.
+Attualmente il dataSet è già popolato con sufficienti dati per verificare la corretta esecuzione di ogni richiesta.
+Tutte le rotte ritornano valori in formato JSON.
 
 ### Class Diagram
 ![Use Class Diagram](/Esame_ClassiDiagram.jpg)
 
-
-### Rotte Applicazione
+## Rotte Applicazione
 | Tipo | Rotta | Descrizione |
 | ---------- | ----------- | ----------- |
-| GET | /Cerca?zipCode=00187 | Restituisce i dati del tempo a partire dallo zip code richiesto |
+| GET | /Cerca?zipCode={zipCodeCittaItaliana} | Restituisce i dati del tempo a partire dallo zip code richiesto |
 | GET | /Suggest | Restituisce la lista capoluoghi |
-| GET | /Ricerca?q=Mi | Ricerca capoluoghi italiani a partire dalla sottostringa inserita |
-| GET | /Stats?nomeCitta=Macerata | Restituisce le statistiche di temperatura e umidità della città richiesta |
+| GET | /Ricerca?q={NomeCapoluogo o Sottostringa} | Ricerca capoluoghi italiani a partire dalla sottostringa inserita |
+| GET | /Stats?nomeCitta={nomeCittaItaliana} | Restituisce le statistiche di temperatura e umidità della città richiesta |
 | POST | /Filters | Restituisce le statistiche filtrate in base ai parametri dati in ingresso |
+
+* ***/Cerca?zipCode=00187***
+    Screen risposta
+* ***/Suggest***
+    Screen risposta
+* ***/Ricerca?q=Mi***
+    Screen risposta
+* ***/Stats?nomeCitta=Roma***
+    Screen risposta
+* ***/Filters***
+    Questa chiamata è di tipo *POST*
+    Il body è un oggetto JSON con il seguente formato:
+    Screen 
+    La risposta sarà come segue:
+    Screen
+
+## Eccezioni
+Il programma gestisce le Possibili eccezioni che possono risultare durante il suo utilizzo e prevede due Eccezioni personalizzate:
+* **NoDataException**
+    Viene lanciata dal programma nel caso in cui viene fatta una richiesta in cui sono necessari dati non presenti nel dataset.
+    Screen
+* **NoBodyException**
+    Viene eseguita se viene effettuata una richiesta POST senza il body.
+    Screen
+
+## Autori
+[@Dennis Pierantozzi](https://github.com/DennisPierantozzi)
+[@Nicola Mochi](https://github.com/NicolaMochi)
+[@Francesco Maria Mosca](https://github.com/francescomariamosca)
