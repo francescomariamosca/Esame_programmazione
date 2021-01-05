@@ -11,7 +11,7 @@ import it.univpm.EsameProgrammazione.Utilities.WeatherUtils;
 
 import java.util.*;
 
-import it.univpm.EsameProgrammazione.Stats.Statstemperature;
+import it.univpm.EsameProgrammazione.Stats.Stats;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -53,6 +53,7 @@ public class Controller {
 			// parte il timer per il salvataggio dei dati ogni ora
 			t.scheduleAtFixedRate(dataSet, 0, 30 * 1000);
 		}
+		dataSet.funzione();
 		return callWeather.chiamataAPI(zipCode, dataSet);
 	}
 
@@ -106,7 +107,7 @@ public class Controller {
 			// parte il timer per il salvataggio dei dati ogni ora
 			t.scheduleAtFixedRate(dataSet, 0, 30 * 1000);
 		}
-		Statstemperature stats = new Statstemperature();
+		Stats stats = new Stats();
 		JSONArray statistiche = new JSONArray();
 		stats.caricaArrayTemperatura(dataSet, nomecitta); 
 		stats.caricaArrayUmidita(dataSet, nomecitta);

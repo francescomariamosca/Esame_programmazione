@@ -13,14 +13,14 @@ import it.univpm.EsameProgrammazione.Utilities.DownloadDataSet;
 @SpringBootTest
 class EsameProgrammazioneApplicationTests {
 
-	private Statstemperature stats;
+	private Stats stats;
 	private DataSet dataSet;
 	private DownloadDataSet download;
 	
 	@BeforeEach
 	protected void setUp() throws Exception
 	{
-		stats = new Statstemperature();
+		stats = new Stats();
 		dataSet = new DataSet();
 		download = new DownloadDataSet();
 		dataSet.setWeathers(download.DownloadArray());

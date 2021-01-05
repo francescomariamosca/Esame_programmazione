@@ -15,7 +15,7 @@ import org.json.simple.JSONObject;
  *
  * Classe che si occupa della gestione delle statistiche
  */
-public class Statstemperature {
+public class Stats {
 	String a;
 
 	public Vector <Double> temperatura = new Vector <Double>();

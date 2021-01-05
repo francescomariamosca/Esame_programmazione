@@ -7,7 +7,7 @@ package it.univpm.EsameProgrammazione.Dizionario;
  *
  * Classe contente gli attributi del dizionario e i getter/setter
  */
-public  class Dizionario {
+public class Dizionario {
 
 
 
@@ -15,7 +15,7 @@ public  class Dizionario {
     protected String nomeCitta;
 
     public Dizionario(){
-
+    	
     }
     public Dizionario(String zipCode, String nomeCitta) {
         this.zipCode = zipCode;
