@@ -42,19 +42,26 @@ Tutte le rotte ritornano valori in formato JSON.
 | POST | /Filters | Restituisce le statistiche filtrate in base ai parametri dati in ingresso |
 
 * ***/Cerca?zipCode=00187***
-    Screen risposta
+Attraverso il Controller viene invocato il metodo chiamataApi della classe WeatherUtils, che restituisce un JSONObject, cioè il risultato della nostra chiamata API, con le informazioni relative alla città all'applicazione di test.
+![Risposta Cerca](/risposta_cerca.jpg)
+
 * ***/Suggest***
-    Screen risposta
+Attraverso il Controller viene invocato il metodo visualizzaDizionario della classe DizionarioImpl, che restituisce un JSONArray, cioè il risultato della nostra chiamata API, con i capoluoghi delle regioni all'applicazione di test.
+![Risposta Suggest](/risposta_suggest.jpg)
+
 * ***/Ricerca?q=Mi***
-    Screen risposta
+Attraverso il Controller viene invocato il metodo cercaSottostringa della classe DizionarioImpl, che restituisce un JSONArray, cioè il risultato della nostra chiamata API, con i capoluoghi delle regioni che contengono la sottostringa passata come parametro.
+![Risposta Ricerca](/risposta_ricerca.jpg)
 * ***/Stats?nomeCitta=Roma***
-    Screen risposta
+Attraverso il Controller vengono invocati i metodi caricaArray della classe Stats, che dopo aver caricato gli array di temperatura e umidità li passa alle funzioni per il calcolo delle statistiche. Infine restituisce un JSONArray, cioè il risultato della nostra chiamata API, con le statistiche di quella città.
+![Risposta Stats](/risposta_stats.jpg)
 * ***/Filters***
-    Questa chiamata è di tipo *POST*
+Con il Controller viene invocato il metodo tipoFiltro della classe Filters, il quale in base al tipo di filtro inserito fa partire la specifica funzione per calcolare le statistiche filtrate. Dunque restituisce un JSONArray, cioè il risultato della nostra chiamata API, con le statistiche di quella città, filtrate.
+    #### Questa chiamata è di tipo *POST*
     Il body è un oggetto JSON con il seguente formato:
-    Screen 
+    ![Richiesta FIlters](/filters_request.jpg)
     La risposta sarà come segue:
-    Screen
+    ![Risposta Filters](/risposta_filters.jpg)
 
 ## Eccezioni
 Il programma gestisce le Possibili eccezioni che possono risultare durante il suo utilizzo e prevede due Eccezioni personalizzate:
@@ -64,6 +71,9 @@ Il programma gestisce le Possibili eccezioni che possono risultare durante il su
 * **NoBodyException**
     Viene eseguita se viene effettuata una richiesta POST senza il body.
     Screen
+
+### Sequence Diagram
+![Sequence Diagram](/sequenze.jpg)
 
 ## Autori
 [@Dennis Pierantozzi](https://github.com/DennisPierantozzi)
