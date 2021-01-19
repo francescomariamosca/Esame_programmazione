@@ -76,11 +76,8 @@ public class WeatherUtils implements Serializable {
 			weather.setUmidita(Double.parseDouble(main.get("humidity").toString()));
 			
 			String nome = weather.getNomeCitta();
-			System.out.println(nome);
-			System.out.println("Anno: "+ now.getYear() + "Mese: " + now.getMonthValue() + "Giorno: " + now.getDayOfMonth());
 			
 			dataSet.addWeather(weather);
-			System.out.println(weather.getNomeCitta());
 			
 			return obj;
 		}

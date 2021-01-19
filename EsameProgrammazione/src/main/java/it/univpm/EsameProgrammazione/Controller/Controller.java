@@ -51,17 +51,9 @@ public class Controller {
 		if (dataSet.isEmpty()) {
 			dataSet.setWeathers(download.DownloadArray());
 			// parte il timer per il salvataggio dei dati ogni ora
-			t.scheduleAtFixedRate(dataSet, 0, 30 * 1000);
+			t.scheduleAtFixedRate(dataSet, 0, 3600 * 1000);
 		}
-		dataSet.funzione();
 		return callWeather.chiamataAPI(zipCode, dataSet);
-	}
-
-	@GetMapping("/vedi")
-	public void getArray() {
-		for (int i = 0; i < dataSet.getWeathers().size(); i++) {
-			System.out.println(dataSet.getWeathers().get(i).getNomeCitta());
-		}
 	}
 
 	/**
