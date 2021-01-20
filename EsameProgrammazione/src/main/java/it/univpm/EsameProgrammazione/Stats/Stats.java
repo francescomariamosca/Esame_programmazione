@@ -24,7 +24,6 @@ public class Stats {
 	double averageHumidity=0;
 	double varianceTemperature=0;
 	double varianceHumidity=0;
-	JSONObject object = new JSONObject();
 
 	@SuppressWarnings("unchecked")
 	public void caricaArrayTemperatura (DataSet dataSet, String a) throws NoDataException{
@@ -46,6 +45,7 @@ public class Stats {
 	}
 		
 	public JSONObject statsTemperatura(String a) {//qual è il problema, il problema è...
+		JSONObject object = new JSONObject();
 		try {
 			Object maxT = Collections.max(temperatura);
 			object.put("Temperatura massima:", maxT);
@@ -75,7 +75,7 @@ public class Stats {
 	}
 	
 	public JSONObject statsUmidita (String a) {
-		//JSONObject object = new JSONObject();
+		JSONObject object = new JSONObject();
 		try {
 			Object maxU = Collections.max(umidita);
 			object.put("Umidità massima:", maxU);
@@ -101,14 +101,6 @@ public class Stats {
 		}
 		
 		return object;
-	}
-
-	public JSONObject getObject() {
-		return object;
-	}
-
-	public void setObject(JSONObject object) {
-		this.object = object;
 	}
 	
 
