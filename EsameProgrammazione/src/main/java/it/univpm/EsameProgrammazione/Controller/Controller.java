@@ -88,16 +88,14 @@ public class Controller {
 	 * rotta per visualizzare le statistiche.
 	 * @param nomecitta nome della citta cercata
 	 * @return JSONArray delle statistiche
-	 * @throws NoDataException 
-	 * @throws NoDataSet 
-	 * @throws StatsException 
-	 */
+	 * @throws NoDataException
+	  */
 	@GetMapping("/Stats")
 	public JSONArray getStatistiche(@RequestParam(name = "nomeCitta", defaultValue = "") String nomecitta) throws NoDataException  {
 		if (dataSet.isEmpty()) {
 			dataSet.setWeathers(download.DownloadArray());
 			// parte il timer per il salvataggio dei dati ogni ora
-			t.scheduleAtFixedRate(dataSet, 0, 30 * 1000);
+			t.scheduleAtFixedRate(dataSet, 0, 3600 * 1000);
 		}
 		Stats stats = new Stats();
 		JSONArray statistiche = new JSONArray();
@@ -132,15 +130,14 @@ public class Controller {
 	 * rotta per visualizzare le statistiche tramite dei range(giornaliero, settimanale, personalizzabile)
 	 * @param infoFilter body contenente il nome e il tipo del range
 	 * @return JSONArray delle statistiche
-	 * @throws NoBodyException 
-	 * @throws NoDataSet 
+	 * @throws NoBodyException  
 	 */
 	@PostMapping("/Filters")
 	public JSONArray getFilters(@RequestBody JSONObject infoFilter) throws NoBodyException  {
 		if (dataSet.isEmpty()) {
 			dataSet.setWeathers(download.DownloadArray());
 			// parte il timer per il salvataggio dei dati ogni ora
-			t.scheduleAtFixedRate(dataSet, 0, 30 * 1000);
+			t.scheduleAtFixedRate(dataSet, 0, 3600 * 1000);
 		}
 		if(infoFilter.isEmpty()) throw new NoBodyException();
 		Filters filtri = new Filters();

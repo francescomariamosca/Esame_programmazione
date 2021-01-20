@@ -43,43 +43,35 @@ Tutte le rotte ritornano valori in formato JSON.
 
 * ***/Cerca?zipCode=00187***
 Attraverso il Controller viene invocato il metodo chiamataApi della classe WeatherUtils, che restituisce un JSONObject, cioè il risultato della nostra chiamata API, con le informazioni relative alla città all'applicazione di test.
-****Esempio****
 ![Risposta Cerca](/risposta_cerca.jpg)
 
 * ***/Suggest***
 Attraverso il Controller viene invocato il metodo visualizzaDizionario della classe DizionarioImpl, che restituisce un JSONArray, cioè il risultato della nostra chiamata API, con i capoluoghi delle regioni all'applicazione di test.
-****Esempio****
 ![Risposta Suggest](/risposta_suggest.jpg)
 
 * ***/Ricerca?q=Mi***
 Attraverso il Controller viene invocato il metodo cercaSottostringa della classe DizionarioImpl, che restituisce un JSONArray, cioè il risultato della nostra chiamata API, con i capoluoghi delle regioni che contengono la sottostringa passata come parametro.
-****Esempio****
 ![Risposta Ricerca](/risposta_ricerca.jpg)
 
 * ***/Stats?nomeCitta=Roma***
 Attraverso il Controller vengono invocati i metodi caricaArray della classe Stats, che dopo aver caricato gli array di temperatura e umidità li passa alle funzioni per il calcolo delle statistiche. Infine restituisce un JSONArray, cioè il risultato della nostra chiamata API, con le statistiche di quella città.
-****Esempio****
 ![Risposta Stats](/risposta_stats.jpg)
 
 * ***/Filters***
 Con il Controller viene invocato il metodo tipoFiltro della classe Filters, il quale in base al tipo di filtro inserito fa partire la specifica funzione per calcolare le statistiche filtrate. Dunque restituisce un JSONArray, cioè il risultato della nostra chiamata API, con le statistiche di quella città, filtrate.
     #### Questa chiamata è di tipo *POST*
     Il body è un oggetto JSON con il seguente formato:
-    ****Esempio****
     ![Richiesta FIlters](/filters_request.jpg)
     La risposta sarà come segue:
-    ****Esempio****
     ![Risposta Filters](/risposta_filters.jpg)
 
 ## Eccezioni
 Il programma gestisce le Possibili eccezioni che possono risultare durante il suo utilizzo e prevede due Eccezioni personalizzate:
 * **NoDataException**
     Viene lanciata dal programma nel caso in cui viene fatta una richiesta in cui sono necessari dati non presenti nel dataset.
-    ****Esempio****
     ![Eccezione NoData](/Eccezione_NoData.jpg)
 * **NoBodyException**
     Viene eseguita se viene effettuata una richiesta POST senza il body.
-    ****Esempio****
     ![Eccezione NoBody](/Eccezione_NoBody.jpg)
 
 ### Sequence Diagram
