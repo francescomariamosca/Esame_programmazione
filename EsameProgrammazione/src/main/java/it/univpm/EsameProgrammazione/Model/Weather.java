@@ -28,6 +28,9 @@ public class Weather implements Serializable {
 	 * Getters and Setters classe Weather
 	 */
 	
+	/**
+	 * @return Temperatura dell'oggetto Weather
+	 */
 	public double getTemperatura() {
 		return temperatura;
 	}

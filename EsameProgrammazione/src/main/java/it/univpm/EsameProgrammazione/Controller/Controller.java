@@ -4,7 +4,6 @@ import it.univpm.EsameProgrammazione.Dizionario.DizionarioImpl;
 import it.univpm.EsameProgrammazione.Exception.NoBodyException;
 import it.univpm.EsameProgrammazione.Exception.NoDataException;
 import it.univpm.EsameProgrammazione.Filter.Filters;
-import it.univpm.EsameProgrammazione.Model.Weather;
 import it.univpm.EsameProgrammazione.Utilities.DataSet;
 import it.univpm.EsameProgrammazione.Utilities.DownloadDataSet;
 import it.univpm.EsameProgrammazione.Utilities.WeatherUtils;
@@ -23,9 +22,6 @@ import org.springframework.web.bind.annotation.*;
  * @author Francesco Maria Mosca
  * @author Dennis Pierantozzi
  * @author Nicola Mochi
- * <p>
- * <p>
- * <p>
  * Classe controller che gestisce tutte le chiamate
  */
 @RestController
@@ -73,7 +69,7 @@ public class Controller {
      * rotta per visualizzare i capoluoghi con i rispettivi zipCode, che contengono la sottostringa immessa
      *
      * @param sottostringa tramite quale fare la ricerca
-     * @return
+     * @return JSONArray con tutte le città che contengono la sottostringa
      */
     @GetMapping("/Ricerca")
     public JSONArray getSottostringa(@RequestParam(name = "q", defaultValue = "") String sottostringa) {
@@ -88,7 +84,7 @@ public class Controller {
      *
      * @param nomecitta nome della citta cercata
      * @return JSONArray delle statistiche
-     * @throws NoDataException
+     * @throws NoDataException Eccezione che viene lanciata quando non sono presenti dati nel dataSet
      */
     @GetMapping("/Stats")
     public JSONArray getStatistiche(@RequestParam(name = "nomeCitta", defaultValue = "") String nomecitta) throws NoDataException {
@@ -108,6 +104,8 @@ public class Controller {
 
     /**
      * Messaggio NoDataException
+     * @param e Eccezione
+     * @return Messaggio di errore
      */
     @ExceptionHandler(NoDataException.class)
     public ResponseEntity<Object> handleIOException(NoDataException e) {
@@ -132,7 +130,7 @@ public class Controller {
      *
      * @param infoFilter body contenente il nome e il tipo del range
      * @return JSONArray delle statistiche
-     * @throws NoBodyException
+     * @throws NoBodyException Eccezione che viene lanciata quando il body per la richiesta è vuoto
      */
     @PostMapping("/Filters")
     public JSONArray getFilters(@RequestBody JSONObject infoFilter) throws NoBodyException {

@@ -47,6 +47,9 @@ protected Vector<Weather> weathers = new Vector<Weather>();
 	 * Getter and Setter vettore weathers
 	 */
 	
+	/**
+	 * @return Vettore di oggetti Weather
+	 */
 	public Vector<Weather> getWeathers() {
 		return weathers;
 	}
@@ -58,6 +61,7 @@ protected Vector<Weather> weathers = new Vector<Weather>();
 	
 	/**
 	 * Aggiunge oggetto al vettore weathers
+	 * @param objectWeather oggetto Weather
 	 */
 	
 	public void addWeather(Weather objectWeather) {
@@ -66,6 +70,7 @@ protected Vector<Weather> weathers = new Vector<Weather>();
 	
 	/**
 	 * Check se il vettore weathers è vuoto.
+	 * @return Boolean variable
 	 */
 	
 	public boolean isEmpty() {

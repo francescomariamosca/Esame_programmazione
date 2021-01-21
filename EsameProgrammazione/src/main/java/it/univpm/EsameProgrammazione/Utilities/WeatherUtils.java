@@ -100,6 +100,10 @@ public class WeatherUtils implements Serializable {
 	 * Getter and Setters WeathersUtils
 	 */
 
+	/**
+	 * @return
+	 * Data dell'oggetto Weather
+	 */
 	public String getData() {
 		return data;
 	}
