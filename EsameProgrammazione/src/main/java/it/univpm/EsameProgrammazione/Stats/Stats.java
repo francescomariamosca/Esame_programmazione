@@ -16,7 +16,7 @@ import org.json.simple.JSONObject;
  * Classe che si occupa della gestione delle statistiche
  */
 public class Stats {
-	String a;
+
 
 	public Vector <Double> temperatura = new Vector <Double>();
 	public Vector <Double> umidita = new Vector <Double>();
@@ -25,26 +25,40 @@ public class Stats {
 	double varianceTemperature=0;
 	double varianceHumidity=0;
 
-	@SuppressWarnings("unchecked")
-	public void caricaArrayTemperatura (DataSet dataSet, String a) throws NoDataException{
+
+	/**
+	 * Funzione che carica l'array temperatura con i dati relativi alla città inserita.
+	 * @param dataSet viene passato il dataset con tutti i dati
+	 * @param nomeCitta viene passato il nome della città di cui si vogliono filtrare le statistiche
+	 */
+	public void caricaArrayTemperatura (DataSet dataSet, String nomeCitta) throws NoDataException{
 		for (int i=0; i<dataSet.getWeathers().size();i++)  {
-			if (dataSet.getWeathers().get(i).getNomeCitta().equals(a)) {
+			if (dataSet.getWeathers().get(i).getNomeCitta().equals(nomeCitta)) {
 				temperatura.add(dataSet.getWeathers().get(i).getTemperatura());
 			}
 		}
 		if (this.temperatura.isEmpty() || this.temperatura.contains("[]"))
 			throw new NoDataException();
-	}	
-	
-	public void caricaArrayUmidita (DataSet dataSet, String a) {
+	}
+
+	/**
+	 * Funzione che carica l'array umidita con i dati relativi alla città inserita.
+	 * @param dataSet viene passato il dataset con tutti i dati
+	 * @param nomeCitta viene passato il nome della città di cui si vogliono filtrare le statistiche
+	 */
+	public void caricaArrayUmidita (DataSet dataSet, String nomeCitta) {
 		for (int i=0; i< dataSet.getWeathers().size();i++) {
-			if (dataSet.getWeathers().get(i).getNomeCitta().equals(a)) {
+			if (dataSet.getWeathers().get(i).getNomeCitta().equals(nomeCitta)) {
 				umidita.add(dataSet.getWeathers().get(i).getUmidita());
 			}
 		}
 	}
-		
-	public JSONObject statsTemperatura(String a) {//qual è il problema, il problema è...
+
+	/**
+	 * Funzione che popola il JSONObject con i dati relativi alla temperatura massima, minima, media e varianza.
+	 * @return ritorna il JSONObject con i dati citati sopra.
+	 */
+	public JSONObject statsTemperatura() {
 		JSONObject object = new JSONObject();
 		try {
 			Object maxT = Collections.max(temperatura);
@@ -73,8 +87,12 @@ public class Stats {
 			return object;
 			
 	}
-	
-	public JSONObject statsUmidita (String a) {
+
+	/**
+	 * Funzione che popola il JSONObject con i dati relativi all' umidità massima, minima, media e varianza.
+	 * @return ritorna il JSONObject con i dati citati sopra.
+	 */
+	public JSONObject statsUmidita () {
 		JSONObject object = new JSONObject();
 		try {
 			Object maxU = Collections.max(umidita);

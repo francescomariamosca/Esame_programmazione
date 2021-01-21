@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
  * @author Nicola Mochi
  *
  *
- * Classe che rappresenta una chiamata e raccoglie
- * le informazioni necessarie per le statistiche
+ * Classe che identifica tutti gli oggetti(weather) che raccolgono
+ * le informazioni necessarie per la modellazione dati
  */
 
 public class Weather implements Serializable {

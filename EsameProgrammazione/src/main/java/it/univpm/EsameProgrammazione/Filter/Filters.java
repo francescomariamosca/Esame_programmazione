@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Vector;
 
+
 /**
  * @author Francesco Maria Mosca
  * @author Dennis Pierantozzi
@@ -18,16 +19,25 @@ import java.util.Vector;
 public class Filters {
 
 
-    Vector<Double> temperatura = new Vector <>();
-    Vector <Double> umidita = new Vector <>();
+   Vector<Double> temperatura = new Vector <>();
+   Vector <Double> umidita = new Vector <>();
     double averageTemperature=0;
     double averageHumidity=0;
     double varianceTemperature=0;
     double varianceHumidity=0;
 
+
     LocalDateTime now = LocalDateTime.now();
 
-    // passo a questa funzione il filtro inserito dall'utente(giornaliero, sett) in base sl numero
+    /**
+     * Questa funzione si occupa di individuare il tipo di filtro inserito dall'utente e in base ad
+     * esso fa partire la relativa funzione per popolare i vettori temperatura e umidità.
+     *
+     * @param dataSet viene passato il dataset con tutti i dati
+     * @param tipo viene passato il tipo di filtro inserito dall'utente
+     * @param nomeCitta viene passato il nome della città di cui si vogliono filtrare le statistiche
+      */
+
     public void tipoFiltro(DataSet dataSet, int tipo, String nomeCitta) {
 
         if (tipo == 1) {
@@ -40,8 +50,16 @@ public class Filters {
             int giorno = now.getDayOfYear();
             personalizzato(dataSet,nomeCitta,giorno,tipo);
         }
+
     }
 
+
+    /**
+     * Popola i vettori temperatura e umidità con i dati relativi al giorno in cui è stata fatta la chiamata.
+     * @param dataSet viene passato il dataset con tutti i dati
+     * @param nomeCitta viene passato il nome della città di cui si vogliono filtrare le statistiche
+     * @param giorno viene passato il giorno attuale in cui si fa la chiamata
+     */
         public void giornaliero(DataSet dataSet, String nomeCitta, int giorno){
             for (int i = 0; i < dataSet.getWeathers().size(); i++) {
                 if (dataSet.getWeathers().get(i).getData().getDayOfYear() == giorno && dataSet.getWeathers().get(i).getNomeCitta().equals(nomeCitta)){
@@ -51,6 +69,13 @@ public class Filters {
             }
         }
 
+    /**
+     * Popola i vettori temperatura e umidità con i dati relativi agli ultimi sette giorni a partire
+     * da quando è stata fatta la chiamata.
+     * @param dataSet viene passato il dataset con tutti i dati
+     * @param nomeCitta viene passato il nome della città di cui si vogliono filtrare le statistiche
+     * @param giorno viene passato il giorno attuale in cui si fa la chiamata
+     */
         public void settimanale(DataSet dataSet, String nomeCitta, int giorno){
             for (int i = 0; i < dataSet.getWeathers().size(); i++){
                 if (dataSet.getWeathers().get(i).getData().getDayOfYear() > (giorno-7) && dataSet.getWeathers().get(i).getNomeCitta().equals(nomeCitta)){
@@ -60,6 +85,17 @@ public class Filters {
             }
         }
 
+
+    /**
+     * Popola i vettori temperatura e umidità con i dati relativi al numero dei giorni inseriti nel
+     * parametro range.
+     * @param dataSet viene passato il dataset con tutti i dati
+     * @param nomeCitta viene passato il nome della città di cui si vogliono filtrare le statistiche
+     * @param giorno viene passato il giorno attuale in cui si fa la chiamata
+     * @param range viene passato il numero di giorni personalizzato di cui si vogliono calcolare le satistiche
+     * come si può vedere nell'if vengono confrontati tutti i dati il cui parametro giorno è maggiore della
+     * quantità giorno-range.
+     */
         public void personalizzato(DataSet dataSet, String nomeCitta, int giorno, int range){
             for (int i = 0; i < dataSet.getWeathers().size(); i++){
                 if (dataSet.getWeathers().get(i).getData().getDayOfYear() > (giorno-range) && dataSet.getWeathers().get(i).getNomeCitta().equals(nomeCitta)){
@@ -69,7 +105,12 @@ public class Filters {
             }
         }
 
-    public JSONObject statsTemperatura(String a) {//qual è il problema, il problema è...
+
+    /**
+     * Funzione che popola il JSONObject con i dati relativi alla temperatura massima, minima, media e varianza.
+     * @return ritorna il JSONObject con i dati citati sopra.
+     */
+    public JSONObject statsTemperatura() {
         JSONObject object = new JSONObject();
         try {
             Object maxT = Collections.max(temperatura);
@@ -98,7 +139,11 @@ public class Filters {
         return object;
     }
 
-    public JSONObject statsUmidita (String a) {
+    /**
+     * Funzione che popola il JSONObject con i dati relativi all' umidità massima, minima, media e varianza.
+     * @return ritorna il JSONObject con i dati citati sopra.
+     */
+    public JSONObject statsUmidita () {
         JSONObject object = new JSONObject();
         try {
             Object maxU = Collections.max(umidita);

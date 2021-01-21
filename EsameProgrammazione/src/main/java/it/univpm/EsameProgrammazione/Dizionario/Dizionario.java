@@ -10,8 +10,13 @@ package it.univpm.EsameProgrammazione.Dizionario;
 public class Dizionario {
 
 
-
+    /**
+     * attributo che indica il codice postale.
+     */
     protected String zipCode;
+    /**
+     * attributo che indica il nome della citta.
+     */
     protected String nomeCitta;
 
     public Dizionario(){

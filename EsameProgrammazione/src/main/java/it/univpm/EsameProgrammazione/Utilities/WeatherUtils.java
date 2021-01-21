@@ -13,7 +13,8 @@ import org.springframework.web.client.RestTemplate;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-/*
+
+/**
  * Classe che realizza le chiamate API
  * il parsing in JSON e popola il vettore di arrayJSON
  * che compone il DataSet
@@ -25,12 +26,10 @@ public class WeatherUtils implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String data;
 	protected JSONObject objectJ;
-	//protected JSONArray weathers;
 	protected JSONObject main;
 	protected JSONParser parser;
 	protected JSONObject obj;
-	
-	// protected DataSet dataSetArray;
+
 	public Weather weather;
 	
 	public WeatherUtils() {
@@ -40,11 +39,13 @@ public class WeatherUtils implements Serializable {
 		this.parser = new JSONParser();
 		this.obj = new JSONObject();
 	}
-	
+
 	/**
 	 * Funzione che realizza la chiamata API, effettua il parsing
 	 * e popola il vettore di array JSON
-	 *
+	 * @param zipCode zipCode della città di cui si sta effettuando la chiamata
+	 * @param dataSet dataset contenente tutti i dati
+	 * @return ritorna un JSONObject con i dati relativi a temperatura e umidità della città inserita.
 	 */
 	
 	public JSONObject chiamataAPI(String zipCode, DataSet dataSet) throws ParseException {
@@ -73,9 +74,7 @@ public class WeatherUtils implements Serializable {
 			weather.setData(now);
 			weather.setTemperatura(Double.parseDouble(main.get("temp").toString()));
 			weather.setUmidita(Double.parseDouble(main.get("humidity").toString()));
-			
-			String nome = weather.getNomeCitta();
-			
+
 			dataSet.addWeather(weather);
 			
 			return obj;
@@ -86,6 +85,13 @@ public class WeatherUtils implements Serializable {
 				obj.put("humidity", "falsche oder nicht verfügbare Postleitzahl");
 				obj.put("date", "code postal incorrect ou indisponible");
 				return obj;
+		}
+		catch (ParseException e){
+			obj.put("name", "zipCode errato o errore nel parsing");
+			obj.put("temperature", "wrong or unavailable zip code");
+			obj.put("humidity", "falsche oder nicht verfügbare Postleitzahl");
+			obj.put("date", "code postal incorrect ou indisponible");
+			return obj;
 		}
 		
 	}

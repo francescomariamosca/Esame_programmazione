@@ -22,10 +22,11 @@ public class DizionarioImpl implements InterfacciaDizionario{
 
 
     Vector<Dizionario> dizionario = new Vector<>();  // vettore che contiene le città prese dal file
-    JSONArray dizionarioCompleto = new JSONArray(); // JSONArray delle 5 città esempio
+    JSONArray dizionarioCompleto = new JSONArray(); // JSONArray delle città esempio
 
     /**
-     * implementazione tramite override del metodo popolaDizionario
+     * implementazione tramite override del metodo popolaDizionario,
+     * il quale popola il dizionario dal file capoluoghi.txt
      */
     @Override
     public void popolaDizionario() {
@@ -54,6 +55,10 @@ public class DizionarioImpl implements InterfacciaDizionario{
 
     }
 
+    /**
+     * Funzione per visualizzare la lista delle città che possono essere inserite
+     * @return ritorna il JSONArray con tutti i capoluoghi con i rispettivi zipCode e nome della città.
+     */
     @Override
     public JSONArray visualizzaDizionario() {
 
@@ -68,6 +73,11 @@ public class DizionarioImpl implements InterfacciaDizionario{
         return dizionarioCompleto;
     }
 
+    /**
+     * metodo che permette di cercare una città inserendo una sottostringa
+     * @param sottostringa la sottostringa che l'utente inserisce per cercare la città
+     * @return ritorna un JSONArray di tutte le città che contengono la sottostringa inserita.
+     */
     @Override
     public JSONArray cercaSottostringa (String sottostringa){
 

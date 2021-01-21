@@ -16,10 +16,9 @@ import it.univpm.EsameProgrammazione.Model.Weather;
 import org.springframework.stereotype.Component;
 
 
-/*
+/**
  * Classe che si occupa della gestione del DataSet
- * che servirà per creare le statistiche
- * Il DataSet è sul file esterno "DataSet.json"
+ * Il DataSet è sul file esterno "dataSet.txt"
  */
 @Component
 public class DataSet extends TimerTask{
@@ -44,8 +43,8 @@ protected Vector<Weather> weathers = new Vector<Weather>();
 	}
 	
 	
-	/*
-	 * Get and Setter vettore weathers
+	/**
+	 * Getter and Setter vettore weathers
 	 */
 	
 	public Vector<Weather> getWeathers() {
@@ -57,7 +56,7 @@ protected Vector<Weather> weathers = new Vector<Weather>();
 	}
 	
 	
-	/*
+	/**
 	 * Aggiunge oggetto al vettore weathers
 	 */
 	
@@ -65,8 +64,8 @@ protected Vector<Weather> weathers = new Vector<Weather>();
 		weathers.add(objectWeather);
 	}
 	
-	/*
-	 * Check se il vettore weathers è vuoto
+	/**
+	 * Check se il vettore weathers è vuoto.
 	 */
 	
 	public boolean isEmpty() {

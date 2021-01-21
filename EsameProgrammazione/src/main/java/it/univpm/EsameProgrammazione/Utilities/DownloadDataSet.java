@@ -18,7 +18,7 @@ import it.univpm.EsameProgrammazione.Model.Weather;
 public class DownloadDataSet {
 	protected  Vector<Weather> array = new Vector<Weather>();
 	
-	@SuppressWarnings("unchecked")
+
 	public  Vector<Weather> DownloadArray()  {
 		File file = new File("dataSet.txt");
 		
